@@ -1,0 +1,70 @@
+/*!
+ * Start Bootstrap - 4 Col Portfolio (https://startbootstrap.com/template-overviews/4-col-portfolio)
+ * Copyright 2013-2018 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-4-col-portfolio/blob/master/LICENSE)
+ */
+
+.table td.text {
+  max-width: 177px;
+}
+
+.table td.text span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  max-width: 100%;
+}
+
+body {
+  padding-top: 54px;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}
+
+.portfolio-item {
+  margin-bottom: 30px;
+}
+
+.pagination {
+  margin-bottom: 30px;
+}
+
+#gridView {
+  display: none;
+}
+
+#bookFields {
+  display: none;
+}
+
+#bulkFields {
+  display: none;
+}
+
+#adminTableView {
+  display: none;
+}
+
+#customerTableView {
+  display: block;
+}
+
+#customerselector {
+  display: block;
+}
+
+img{
+  /* height: 100px;
+  width: 100px; */
+  transition:transform 0.25s ease;
+}
+
+.thumbnailSize:hover {
+	-webkit-transform:scale(3.5);
+        transform:scale(3.5);
+}

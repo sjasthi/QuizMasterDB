@@ -1,0 +1,15 @@
+Deployment instructions for Quiz Master PHP edition. 
+Created 7/31/19 - AR
+
+The name of the database? quiz_master
+What sql files need to be imported and in this order? 
+In .\sql\ folder:
+- quiz_master.sql
+- preferences.sql
+- questions.sql
+- topics.sql
+- users.sql
+
+Default ADMIN:
+- user:admin@test.com
+- pass: 12345
