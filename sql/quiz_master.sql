@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 14, 2019 at 03:33 PM
+-- Generation Time: Dec 16, 2019 at 02:58 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.7
 
@@ -40,8 +40,8 @@ CREATE TABLE `preferences` (
 --
 
 INSERT INTO `preferences` (`id`, `name`, `value`, `comments`) VALUES
-(1, 'NO_OF_TOPICS_PER_ROW', 5, 'This is the number of topics, per row, on home page'),
-(2, 'NO_OF_QUESTIONS_TO_SHOW', 5, 'The number of Question per quiz');
+(1, 'NO_OF_TOPICS_PER_ROW', 3, 'This is the number of topics, per row, on home page'),
+(2, 'NO_OF_QUESTIONS_TO_SHOW', 10, 'The number of Question per quiz');
 
 -- --------------------------------------------------------
 
@@ -291,7 +291,8 @@ INSERT INTO `questions` (`id`, `topic`, `question`, `choice_1`, `choice_2`, `cho
 (224, 'PHP', 'PHP variable start with which symbol?', '$', '&', '!', '#', '$', 'Images/PHP/phparray1.png'),
 (225, 'PHP', 'What is correct way to open file \"data.ext\" as readable?', 'open(\"time.txt\");', 'open(\"time.txt\",\"read\");', 'fopen(\"time.txt\",\"r\");', 'fopen(\"time.txt\",\"r+\");', 'fopen(\"time.txt\",\"r+\");', 'Images/PHP/phparray1.png'),
 (226, 'PHP', 'What is the superglobal variable holds information about headers, paths, and script locations?', '$_SESSION', '$_GLOBALS', '$_SERVER', '$_GET', '$_SERVER', 'Images/PHP/phparray1.png'),
-(227, 'PHP', 'when you want to check if two values are equal and of same data type. Which operator to use?', '!=', '=', '===', '==', '===', 'Images/PHP/phparray1.png');
+(227, 'PHP', 'when you want to check if two values are equal and of same data type. Which operator to use?', '!=', '=', '===', '==', '===', 'Images/PHP/phparray1.png'),
+(228, 'PHP', 'what method you use to print variables on php?', 'dump_var', 'dump', 'print', 'var_dump', 'var_dump', 'Images/PHP/download.png');
 
 -- --------------------------------------------------------
 
@@ -310,7 +311,6 @@ CREATE TABLE `topics` (
 --
 
 INSERT INTO `topics` (`order`, `topic`, `image_name`) VALUES
-(0, 'PHP', 'phparray1.png'),
 (1, 'Dances', 'dances.jpg'),
 (2, 'Dresses', 'dresses_and_costumes.png'),
 (3, 'Embroidery', 'embroidery.png'),
@@ -321,7 +321,8 @@ INSERT INTO `topics` (`order`, `topic`, `image_name`) VALUES
 (8, 'Monuments', 'places_and_monuments.png'),
 (9, 'Movies', 'movies.png'),
 (10, 'NRIs', 'NRI_s.jpg'),
-(11, 'Sports', 'sports.png');
+(11, 'Sports', 'sports.png'),
+(12, 'PHP', 'phparray1.png');
 
 -- --------------------------------------------------------
 
@@ -388,7 +389,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=228;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
+
+--
+-- AUTO_INCREMENT for table `topics`
+--
+ALTER TABLE `topics`
+  MODIFY `order` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
