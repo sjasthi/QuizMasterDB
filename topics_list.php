@@ -5,9 +5,9 @@ require 'db_configuration.php';
 
 $query = "SELECT * FROM topics";
 
-$GLOBALS['id'] = mysqli_query($db, $query);
-$GLOBALS['topic'] = mysqli_query($db, $query);
-$GLOBALS['image_name'] = mysqli_query($db, $query);
+$GLOBALS['data'] = mysqli_query($db, $query);
+// $GLOBALS['topic'] = mysqli_query($db, $query);
+// $GLOBALS['image_name'] = mysqli_query($db, $query);
 ?>
 
 <?php $page_title = 'Topic List'; ?>
@@ -86,9 +86,9 @@ $GLOBALS['image_name'] = mysqli_query($db, $query);
                 </thead>
                 <tbody>
                 <?php
-                if ($topic->num_rows > 0) {
+                if ($data->num_rows > 0) {
                     // output data of each row
-                    while($row = $topic->fetch_assoc()) {
+                    while($row = $data->fetch_assoc()) {
                         echo '<tr>
                                 <td>'.$row["order"].' </td>            
                                 <td>'.$row["topic"].' </span> </td>

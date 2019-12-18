@@ -5,15 +5,15 @@ require 'db_configuration.php';
 
 $query = "SELECT * FROM questions";
 
-$GLOBALS['id'] = mysqli_query($db, $query);
-$GLOBALS['topic'] = mysqli_query($db, $query);
-$GLOBALS['question'] = mysqli_query($db, $query);
-$GLOBALS['choice_1'] = mysqli_query($db, $query);
-$GLOBALS['choice_2'] = mysqli_query($db, $query);
-$GLOBALS['choice_3'] = mysqli_query($db, $query);
-$GLOBALS['choice_4'] = mysqli_query($db, $query);
-$GLOBALS['answer'] = mysqli_query($db, $query);
-$GLOBALS['image_name'] = mysqli_query($db, $query);
+$GLOBALS['data'] = mysqli_query($db, $query);
+// $GLOBALS['topic'] = mysqli_query($db, $query);
+// $GLOBALS['question'] = mysqli_query($db, $query);
+// $GLOBALS['choice_1'] = mysqli_query($db, $query);
+// $GLOBALS['choice_2'] = mysqli_query($db, $query);
+// $GLOBALS['choice_3'] = mysqli_query($db, $query);
+// $GLOBALS['choice_4'] = mysqli_query($db, $query);
+// $GLOBALS['answer'] = mysqli_query($db, $query);
+// $GLOBALS['image_name'] = mysqli_query($db, $query);
 ?>
 
 <?php $page_title = 'Quiz Master > Questions'; ?>
@@ -93,9 +93,10 @@ $GLOBALS['image_name'] = mysqli_query($db, $query);
                 </thead>
                 <tbody>
                 <?php
-                if ($id->num_rows > 0) {
+                // fetch the data from $_GLOBALS
+                if ($data->num_rows > 0) {
                     // output data of each row
-                    while($row = $id->fetch_assoc()) {
+                    while($row = $data->fetch_assoc()) {
                         echo '<tr>
                                 <td>'.$row["id"].'</td>
                                 <td>'.$row["topic"].' </span> </td>
