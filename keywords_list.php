@@ -6,8 +6,6 @@ require 'db_configuration.php';
 $query = "SELECT * FROM keywords";
 
 $GLOBALS['data'] = mysqli_query($db, $query);
-// $GLOBALS['topic'] = mysqli_query($db, $query);
-// $GLOBALS['image_name'] = mysqli_query($db, $query);
 ?>
 
 <?php $page_title = 'Quiz Master > Keywords'; ?>
@@ -39,9 +37,13 @@ $GLOBALS['data'] = mysqli_query($db, $query);
         if(isset($_GET['createKeyword'])){
             if($_GET["createKeyword"] == "Success"){
                 echo '<br><h3>Success! Your keyword has been added!</h3>';
+            } elseif($_GET["createKeyword"] == "Error"){
+                echo '<br><h3>Error! Failed to create keyword.</h3>';
+            } elseif($_GET["createKeyword"] == "KEYWORD_EXISTS"){
+                echo '<br><h3>Keyword already exists!</h3>';
             }
         }
-
+        
         if(isset($_GET['keywordUpdated'])){
             if($_GET["keywordUpdated"] == "Success"){
                 echo '<br><h3>Success! Your keyword has been modified!</h3>';
@@ -54,11 +56,6 @@ $GLOBALS['data'] = mysqli_query($db, $query);
             }
         }
 
-        if(isset($_GET['createKeyword'])){
-            if($_GET["createKeyword"] == "Success"){
-                echo '<br><h3>Success! Your keyword has been added!</h3>';
-            }
-        }
     ?>
     <!-- Page Heading -->
     <h1 class="my-4">
@@ -104,8 +101,8 @@ $GLOBALS['data'] = mysqli_query($db, $query);
                         echo '<tr>
                                 <td>'.$row["keywordID"].' </td>            
                                 <td><a href="questions_for_keyword.php?keyword='.$keywordID.'">'.$keyword.'</a></span></td>
-                                <td><a class="btn btn-warning btn-sm" href="modifyKeyword.php?keyword='.$row["keywordID"].'">Modify</a></td>                                  
-                                <td><a class="btn btn-danger btn-sm" href="deleteKeyword.php?keyword='.$row["keywordID"].'">Delete</a></td> 
+                                <td><a class="btn btn-warning btn-sm" href="modifyKeyword.php?keyword='.$row["keyword"].'">Modify</a></td>                                  
+                                <td><a class="btn btn-danger btn-sm" href="deleteKeyword.php?keyword='.$row["keyword"].'">Delete</a></td> 
                             </tr>';
                     }//end while
                 }//end if
