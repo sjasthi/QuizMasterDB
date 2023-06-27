@@ -3,7 +3,10 @@
 require 'bin/functions.php';
 require 'db_configuration.php';
 
-$query = "SELECT * FROM keywords";
+$query = "SELECT keywords.keywordID, keywords.keyword , COUNT(questionkeyword.questionID) AS linked_questions
+         FROM keywords
+         LEFT JOIN questionkeyword ON keywords.keywordID = questionkeyword.keywordID
+         GROUP BY keywords.keywordID";
 
 $GLOBALS['data'] = mysqli_query($db, $query);
 ?>
@@ -71,9 +74,9 @@ $GLOBALS['data'] = mysqli_query($db, $query);
             <div class="table responsive">
                 <thead>
                 <tr>
-
                     <th>ID</th>
                     <th>Keyword</th>
+                    <th>Linked Questions</th>
                     <th>Modify Keyword</th>
                     <th>Delete Keyword</th>
 
@@ -87,20 +90,12 @@ $GLOBALS['data'] = mysqli_query($db, $query);
 
                         $keywordID = $row["keywordID"];
                         $keyword = $row["keyword"];
+                        $linked_questions = $row["linked_questions"];
     
-                        $keywordQuery = "SELECT q.question
-                                        FROM questions q
-                                        JOIN questionkeyword qk ON q.id = qk.questionID
-                                        JOIN keywords k ON qk.keywordID = k.keywordID
-                                        WHERE k.keywordID = '$keywordID'";
-                        
-                        $keywordResult = mysqli_query($db, $keywordQuery);
-    
-
-
                         echo '<tr>
-                                <td>'.$row["keywordID"].' </td>            
+                                <td>'. $keywordID .' </td>            
                                 <td><a href="questions_for_keyword.php?keyword='.$keywordID.'">'.$keyword.'</a></span></td>
+                                <td>'. $linked_questions .' </td> 
                                 <td><a class="btn btn-warning btn-sm" href="modifyKeyword.php?keyword='.$row["keyword"].'">Modify</a></td>                                  
                                 <td><a class="btn btn-danger btn-sm" href="deleteKeyword.php?keyword='.$row["keyword"].'">Delete</a></td> 
                             </tr>';

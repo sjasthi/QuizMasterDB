@@ -49,17 +49,18 @@ if (isset($_POST['topic'])){
         // if everything is ok, try to upload file
         } else {
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                    echo $target_file;       
+                echo $target_file;       
                 $sql = "UPDATE topics
                 SET 
-                    topic = '$topic',
+                    topic = '$topic',   
 
                     image_name = '$target_file'        
                 
-                WHERE id = '$id'";
+                WHERE `order` = '$id'";
 
                 mysqli_query($db, $sql);
                 header('location: topics_list.php?topicUpdated=Success');
+                exit;
                 }
             }
     }
@@ -67,16 +68,14 @@ if (isset($_POST['topic'])){
              
             $sql = "UPDATE topics
             SET 
-                topic= '$topic',            
+                topic = '$topic'           
             
-            WHERE id = '$id'";
+            WHERE `order` = '$id'";
 
             mysqli_query($db, $sql);
-            
             header('location: topics_list.php?topicUpdated=Success');
+            exit;
             }
-
-        
-        
+       
 }//end if
 ?>
