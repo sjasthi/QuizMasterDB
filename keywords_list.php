@@ -3,14 +3,15 @@
 require 'bin/functions.php';
 require 'db_configuration.php';
 
-$query = "SELECT * FROM topics";
+$query = "SELECT keywords.keywordID, keywords.keyword , COUNT(questionkeyword.questionID) AS linked_questions
+         FROM keywords
+         LEFT JOIN questionkeyword ON keywords.keywordID = questionkeyword.keywordID
+         GROUP BY keywords.keywordID";
 
 $GLOBALS['data'] = mysqli_query($db, $query);
-// $GLOBALS['topic'] = mysqli_query($db, $query);
-// $GLOBALS['image_name'] = mysqli_query($db, $query);
 ?>
 
-<?php $page_title = 'Topic List'; ?>
+<?php $page_title = 'Quiz Master > Keywords'; ?>
 <?php include('header.php'); ?>
 
 <style>
@@ -36,29 +37,28 @@ $GLOBALS['data'] = mysqli_query($db, $query);
 <br><br>
 <div class="container-fluid">
     <?php
-        if(isset($_GET['createQuestion'])){
-            if($_GET["createQuestion"] == "Success"){
-                echo '<br><h3>Success! Your question has been added!</h3>';
+        if(isset($_GET['createKeyword'])){
+            if($_GET["createKeyword"] == "Success"){
+                echo '<br><h3>Success! Your keyword has been added!</h3>';
+            } elseif($_GET["createKeyword"] == "Error"){
+                echo '<br><h3>Error! Failed to create keyword.</h3>';
+            } elseif($_GET["createKeyword"] == "KEYWORD_EXISTS"){
+                echo '<br><h3>Keyword already exists!</h3>';
+            }
+        }
+        
+        if(isset($_GET['keywordUpdated'])){
+            if($_GET["keywordUpdated"] == "Success"){
+                echo '<br><h3>Success! Your keyword has been modified!</h3>';
             }
         }
 
-        if(isset($_GET['questionUpdated'])){
-            if($_GET["questionUpdated"] == "Success"){
-                echo '<br><h3>Success! Your question has been modified!</h3>';
+        if(isset($_GET['keywordDeleted'])){
+            if($_GET["keywordDeleted"] == "Success"){
+                echo '<br><h3>Success! Your keyword has been deleted!</h3>';
             }
         }
 
-        if(isset($_GET['questionDeleted'])){
-            if($_GET["questionDeleted"] == "Success"){
-                echo '<br><h3>Success! Your question has been deleted!</h3>';
-            }
-        }
-
-        if(isset($_GET['createTopic'])){
-            if($_GET["createTopic"] == "Success"){
-                echo '<br><h3>Success! Your topic has been added!</h3>';
-            }
-        }
     ?>
     <!-- Page Heading -->
     <h1 class="my-4">
@@ -69,18 +69,16 @@ $GLOBALS['data'] = mysqli_query($db, $query);
     </h1>
     
     <div id="customerTableView">
-
-        <button><a class="btn btn-sm" href="createTopic.php">Create a Topic</a></button>
+        <button><a class="btn btn-sm" href="createKeyword.php">Create a Keyword</a></button>
         <table class="table table-striped" id="ceremoniesTable">
             <div class="table responsive">
                 <thead>
                 <tr>
-
                     <th>ID</th>
-                    <th>Topic</th>
-                    <th>Image Name</th>
-                    <th>Modify Topic</th>
-                    <th>Delete Topic</th>
+                    <th>Keyword</th>
+                    <th>Linked Questions</th>
+                    <th>Modify Keyword</th>
+                    <th>Delete Keyword</th>
 
                 </tr>
                 </thead>
@@ -89,12 +87,17 @@ $GLOBALS['data'] = mysqli_query($db, $query);
                 if ($data->num_rows > 0) {
                     // output data of each row
                     while($row = $data->fetch_assoc()) {
+
+                        $keywordID = $row["keywordID"];
+                        $keyword = $row["keyword"];
+                        $linked_questions = $row["linked_questions"];
+    
                         echo '<tr>
-                                <td>'.$row["order"].' </td>            
-                                <td>'.$row["topic"].' </span> </td>
-                                <td><img class="thumbnailSize" src="'.'Images/index_images/'.$row["image_name"].'" alt="'.$row["image_name"].'"></td>
-                                <td><a class="btn btn-warning btn-sm" href="modifyTopic.php?topic='.$row["topic"].'">Modify</a></td>                                  
-                                <td><a class="btn btn-danger btn-sm" href="deleteTopic.php?topic='.$row["topic"].'">Delete</a></td> 
+                                <td>'. $keywordID .' </td>            
+                                <td><a href="questions_for_keyword.php?keyword='.$keywordID.'">'.$keyword.'</a></span></td>
+                                <td>'. $linked_questions .' </td> 
+                                <td><a class="btn btn-warning btn-sm" href="modifyKeyword.php?keyword='.$row["keyword"].'">Modify</a></td>                                  
+                                <td><a class="btn btn-danger btn-sm" href="deleteKeyword.php?keyword='.$row["keyword"].'">Delete</a></td> 
                             </tr>';
                     }//end while
                 }//end if
@@ -111,7 +114,7 @@ $GLOBALS['data'] = mysqli_query($db, $query);
 <!-- /.container -->
 <!-- Footer -->
 <footer class="page-footer text-center">
-<p>Created for ICS 499 Summer Project "Team Bears"</p>
+    <p>Created for ICS 499 Summer Project "Team Bears"</p>
 </footer>
 
 <!--JQuery-->
@@ -155,3 +158,5 @@ $GLOBALS['data'] = mysqli_query($db, $query);
 </script>
 </body>
 </html>
+
+

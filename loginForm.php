@@ -29,14 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 ?>
 <body>
   <div class="form">
-
-      <ul class="tab-group">
-        <li class="tab active"><a href="#login">Log In</a></li>
-      </ul>
-
       <div class="tab-content">
-
          <div id="login">
+            <ul class="tab-group">
+              <li class="tab active"><a href="#signup">Sign Up</a></li>
+            </ul>
           <h1>Welcome Back!</h1>
 
           <form action="loginForm.php" method="post" autocomplete="off">
@@ -61,7 +58,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
         </div>
 
-        <div id="signup">
+        <div id="signup" style="overflow: hidden;"> <!-- Hide Scroolbar -->
+          <ul class="tab-group">
+            <li class="tab active"><a href="#login">Log In</a></li>
+          </ul>
           <h1>Sign Up for Free</h1>
 
           <form action="loginForm.php" method="post" autocomplete="off">

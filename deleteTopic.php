@@ -36,7 +36,7 @@ if ($result->num_rows > 0) {
     <h3>Delete Question: '.$row["topic"].' </h3> <br>
     
     <div class="form-group col-md-4">
-      <label for="id">Id</label>
+      <label for="id">ID</label>
       <input type="text" class="form-control" name="id" value="'.$row["order"].'"  maxlength="5" readonly>
     </div>
     
