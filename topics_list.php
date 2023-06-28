@@ -111,7 +111,7 @@ $GLOBALS['data'] = mysqli_query($db, $query);
 <!-- /.container -->
 <!-- Footer -->
 <footer class="page-footer text-center">
-    <p>Created for ICS 325 Summer Project "Team Alligators"</p>
+<p>Created for ICS 499 Summer Project "Team Bears"</p>
 </footer>
 
 <!--JQuery-->
