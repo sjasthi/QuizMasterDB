@@ -351,6 +351,28 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `hash`, `active`,
 (2, 'Mahesh', 'Sunkara', 'mahesh@silcmn.com', '$2y$10$zFAG5GBNtf.5BpowMqZSputSLeG8OzfKACpjAMsePjZhu.TnvU/Bu', 'yes', 'admin', '0000-00-00', '0000-00-00'),
 (3, 'SILC', 'Tester', 'test@silcmn.com', '$2y$10$zFAG5GBNtf.5BpowMqZSputSLeG8OzfKACpjAMsePjZhu.TnvU/Bu', 'yes', 'admin', '0000-00-00', '0000-00-00'),
 (4, 'SILC', 'CS320', 'cs320@silcmn.com', '$2y$10$zFAG5GBNtf.5BpowMqZSputSLeG8OzfKACpjAMsePjZhu.TnvU/Bu', 'yes', 'admin', '0000-00-00', '0000-00-00');
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `keywords`
+--
+
+CREATE TABLE `keywords` (
+    `id` int(11) NOT NULL,
+    `keyword` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `topic_keywords`
+--
+
+CREATE TABLE `topic_keywords` (
+    `topic_id` int(50) NOT NULL,
+    `keyword_id` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 --
 -- Indexes for dumped tables
