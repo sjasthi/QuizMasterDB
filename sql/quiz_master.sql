@@ -365,13 +365,14 @@ CREATE TABLE `keywords` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `topic_keywords`
+-- Table structure for table `question_keywords`
 --
 
-CREATE TABLE `topic_keywords` (
-    `topic_id` int(50) NOT NULL,
-    `keyword_id` int(20) NOT NULL
+CREATE TABLE `question_keywords` (
+    `question_id` int(11) NOT NULL,
+    `keyword_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 
 --
