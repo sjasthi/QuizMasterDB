@@ -354,28 +354,6 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `hash`, `active`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `keywords`
---
-
-CREATE TABLE `keywords` (
-    `id` int(11) NOT NULL,
-    `keyword` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `question_keywords`
---
-
-CREATE TABLE `question_keywords` (
-    `question_id` int(11) NOT NULL,
-    `keyword_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-
---
 -- Indexes for dumped tables
 --
 
