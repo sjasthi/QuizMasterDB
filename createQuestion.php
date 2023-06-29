@@ -12,7 +12,10 @@
     $resultset = $mysqli->query("SELECT DISTINCT topic FROM topics ORDER BY topic ASC");   
 ?>
 <link href="css/form.css" rel="stylesheet">
-<style>#title {text-align: center; color: darkgoldenrod;}</style>
+<style>#title {text-align: center; color: darkgoldenrod;}
+.hidden {display: none;}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <div class="container">
     <!--Check the CeremonyCreated and if Failed, display the error message-->
     <?php
@@ -82,6 +85,11 @@
             </tr>
         </table>
 
+        <!-- Add keyword textboxes | No require to add keywords -->
+        <div id="keywordContainer"></div>
+        <button type="button" id="addKeyword">Add Keyword</button> 
+        <button type="button" class="removeKeyword hidden">Remove Keyword</button>
+
         <br><br>
         <div align="center" class="text-left">
             <button type="submit" name="submit" class="btn btn-primary btn-md align-items-center">Create Question</button>
@@ -91,3 +99,29 @@
     </form>
 </div>
 
+<!-- Add JS for adding and removing keywords -->
+<!-- Source used: https://stackoverflow.com/questions/60008639/add-input-fields-on-button-click-with-data-from-php -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<!-- .hidden {display: none;} -->
+<script> 
+$(document).ready(function() {
+  var i = 1;
+  $('#addKeyword').click(function() {
+    $('#keywordContainer').append('<div id="row' + i + '"><label" for="keyword_' + i + '">Keyword ' + i + '</label><input type="text" name="keyword_' + i + '" value=""></div>')
+    i++;
+    $('.removeKeyword').removeClass('hidden');   
+  });
+  $(document).on('click', '.removeKeyword', function() {
+    var button_id = $(this).attr("id");
+    i--;
+    $('#row' + $('#keywordContainer div').length).remove();
+    if (i<=1) {
+      $('.removeKeyword').addClass('hidden');
+    }
+  });
+});
+</script>
+<!-- <div id="keywordContainer"></div>
+        <button type="button" id="addKeyword">Add Keyword</button> 
+        <button type="button" class="removeKeyword hidden">Remove Keyword</button>
+</div> -->

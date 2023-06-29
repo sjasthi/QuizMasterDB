@@ -3,9 +3,9 @@
 require 'bin/functions.php';
 require 'db_configuration.php';
 
-$query = "SELECT keywords.keywordID, keywords.keyword , COUNT(questionkeyword.questionID) AS linked_questions
+$query = "SELECT keywords.keywordID, keywords.keyword , COUNT(question_keywords.questionID) AS linked_questions
          FROM keywords
-         LEFT JOIN questionkeyword ON keywords.keywordID = questionkeyword.keywordID
+         LEFT JOIN question_keywords ON keywords.keywordID = question_keywords.keywordID
          GROUP BY keywords.keywordID";
 
 $GLOBALS['data'] = mysqli_query($db, $query);
