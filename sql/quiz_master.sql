@@ -360,6 +360,20 @@ CREATE TABLE `keywords` (
     `id` int(11) NOT NULL,
     `keyword` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+insert into `keywords` values 
+(1, `dances`),
+(2, `dresses`),
+(3, `Embroidery`),
+(4, `Festivals`),
+(5, `foods`),
+(6, `instruments`),
+(7, `leaders`),
+(8,`Monuments`),
+(9, `movies`),
+(10, `NRIs`),
+(11, `Sports`),
+(12, `Dances`),
+(13, `PHP`);
 
 -- --------------------------------------------------------
 
