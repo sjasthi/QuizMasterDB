@@ -18,7 +18,7 @@ if (isset($_GET['keyword'])) {
     // Query the questions related to the keyword
     $questionQuery = "SELECT q.*, k.*
                       FROM questions q
-                      JOIN questionkeyword qk ON q.id = qk.questionID
+                      JOIN question_keywords qk ON q.id = qk.questionID
                       JOIN keywords k ON qk.keywordID = k.keywordID
                       WHERE qk.keywordID = '$keywordID'";
     $questionsResult = mysqli_query($db, $questionQuery);

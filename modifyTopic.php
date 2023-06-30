@@ -42,7 +42,7 @@ if ($result->num_rows > 0) {
       <input type="hidden" class="form-control" name="image" value="'.$row["image_name"].'" maxlength="255" required>
       <br>
       <div class="text-left">
-          <button type="submit" name="submit" class="btn btn-primary btn-md align-items-center">Modify Question</button>
+          <button type="submit" name="submit" class="btn btn-primary btn-md align-items-center">Modify Topic</button>
       </div>
       <br> <br>
       
