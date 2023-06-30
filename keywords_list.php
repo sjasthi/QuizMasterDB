@@ -3,10 +3,10 @@
 require 'bin/functions.php';
 require 'db_configuration.php';
 
-$query = "SELECT keywords.keywordID, keywords.keyword , COUNT(question_keywords.questionID) AS linked_questions
+$query = "SELECT keywords.id, keywords.keyword , COUNT(question_keywords.question_id) AS linked_questions
          FROM keywords
-         LEFT JOIN question_keywords ON keywords.keywordID = question_keywords.keywordID
-         GROUP BY keywords.keywordID";
+         LEFT JOIN question_keywords ON keywords.id = question_keywords.keyword_id
+         GROUP BY keywords.id";
 
 $GLOBALS['data'] = mysqli_query($db, $query);
 ?>
@@ -83,7 +83,7 @@ $GLOBALS['data'] = mysqli_query($db, $query);
                 </tr>
                 </thead>
                 <tbody>
-                <?php
+                < ?php
                 if ($data->num_rows > 0) {
                     // output data of each row
                     while($row = $data->fetch_assoc()) {
