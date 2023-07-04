@@ -83,7 +83,7 @@ $GLOBALS['data'] = mysqli_query($db, $query);
                 </tr>
                 </thead>
                 <tbody>
-                < ?php
+                <?php
                 if ($data->num_rows > 0) {
                     // output data of each row
                     while($row = $data->fetch_assoc()) {
