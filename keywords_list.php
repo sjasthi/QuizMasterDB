@@ -88,7 +88,7 @@ $GLOBALS['data'] = mysqli_query($db, $query);
                     // output data of each row
                     while($row = $data->fetch_assoc()) {
 
-                        $keywordID = $row["keywordID"];
+                        $keywordID = $row["id"];
                         $keyword = $row["keyword"];
                         $linked_questions = $row["linked_questions"];
     

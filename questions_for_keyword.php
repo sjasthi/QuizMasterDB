@@ -9,19 +9,18 @@ if (isset($_GET['keyword'])) {
 
 
     // Query the keyword text from the keywords table
-    $query = "SELECT keyword FROM keywords WHERE keywordID = '$keywordID'";
+    $query = "SELECT keyword FROM keywords WHERE id = '$keywordID'";
     $keywordResult = mysqli_query($db, $query);
     $keywordRow = mysqli_fetch_assoc($keywordResult);
     $keywordText = $keywordRow['keyword'];
 
 
-    // Query the questions related to the keyword
-    $questionQuery = "SELECT q.*, k.*
-                      FROM questions q
-                      JOIN question_keywords qk ON q.id = qk.questionID
-                      JOIN keywords k ON qk.keywordID = k.keywordID
-                      WHERE qk.keywordID = '$keywordID'";
-    $questionsResult = mysqli_query($db, $questionQuery);
+// Query the questions related to the keyword
+$questionQuery = "SELECT q.*, k.*
+                  FROM questions q
+                  JOIN question_keywords qk ON q.id = qk.question_id
+                  JOIN keywords k ON qk.keyword_id = k.id
+                  WHERE qk.keyword_id = '$keywordID'";
 } else {
     // Redirect to the keywords_list.php page if the keyword parameter is not provided
     header("Location: keywords_list.php");
