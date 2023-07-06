@@ -21,6 +21,8 @@ $questionQuery = "SELECT q.*, k.*
                   JOIN question_keywords qk ON q.id = qk.question_id
                   JOIN keywords k ON qk.keyword_id = k.id
                   WHERE qk.keyword_id = '$keywordID'";
+
+$questionsResult = mysqli_query($db, $questionQuery);
 } else {
     // Redirect to the keywords_list.php page if the keyword parameter is not provided
     header("Location: keywords_list.php");
@@ -111,8 +113,8 @@ $questionQuery = "SELECT q.*, k.*
                             <td>'.$row["topic"].' </span> </td>
                             <td>'.$row["question"].'</td>
                             <td>'.$row["keyword"].'</td>        
-                            <td><a class="btn btn-warning btn-sm" href="modifyKeyword.php?keyword='.$row["keywordID"].'">Modify</a></td>                                  
-                            <td><a class="btn btn-danger btn-sm" href="deleteKeyword.php?keyword='.$row["keywordID"].'">Delete</a></td> 
+                            <td><a class="btn btn-warning btn-sm" href="modifyKeyword.php?keyword='.$row["keyword"].'">Modify</a></td>                                  
+                            <td><a class="btn btn-danger btn-sm" href="deleteKeyword.php?keyword='.$row["keyword"].'">Delete</a></td> 
                             </tr>';
                         }// end while loop
                     } else {
