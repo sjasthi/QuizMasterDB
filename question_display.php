@@ -1,5 +1,5 @@
 
-<?php $page_title = 'Modify Question'; ?>
+<?php $page_title = 'Question Display'; ?>
 <?php $page_title = 'Quiz Master > Question Display'; ?>
 <?php 
     require 'bin/functions.php';
@@ -11,7 +11,8 @@
 ?>
 
 <style>
-    .image-centered {
+
+.image-centered {
         display: block;
         margin-left: auto;
         margin-right: auto;
