@@ -34,7 +34,7 @@ if (isset($_GET['id'])){
             WHERE id = '$id'";
 
     if (!$result = $db->query($sql)) {
-        die ('There was an error running query[' . $connection->error . ']');
+      die ('There was an error running query[' . $db->error . ']');
     }//end if
 }//end if
 
@@ -66,7 +66,22 @@ if ($result->num_rows > 0) {
       //--------------My draft
       echo '<img class="image-centered" src="' .$row["image_name"]. '" alt="'.$row["image_name"].'  ">';
       echo '<h2 id="title">Question Display</h2><br>';
+      $sql_keywords = "SELECT k.keyword FROM keywords k
+        INNER JOIN question_keywords qk ON k.id = qk.keyword_id
+        WHERE qk.question_id = '".$id."'";
+
+      $keywords_result = $db->query($sql_keywords);
+
+      $keywords_array = array();
+      while($keyword_row = $keywords_result->fetch_assoc()) {
+    $keywords_array[] = $keyword_row['keyword'];
+    }
+    $keywords_string = implode(', ', $keywords_array);
+
       echo '<h3>'.$row["topic"].' - '.$row["question"].'? </h3> <br>';
+
+      echo '<h4>Keywords</h4>';
+      echo '<p>'.$keywords_string.'</p><br>';
 
       echo '<div>
 
@@ -81,9 +96,6 @@ if ($result->num_rows > 0) {
 
       <h4>Choice 4</h4>
       <p>'.$row["choice_4"].'</p><br>
-
-      <h4>Answer</h4>
-      <p>'.$row["answer"].'</p><br>
 
       
       </div>';
