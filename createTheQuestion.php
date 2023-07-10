@@ -13,6 +13,13 @@ if (isset($_POST['topic'])){
     $choice4 = mysqli_real_escape_string($db,$_POST['choice_4']);
     $answer = mysqli_real_escape_string($db,$_POST['answer']);
     $imageName = basename($_FILES["fileToUpload"]["name"]);
+        // check for empty file
+    if(empty($_FILES['fileToUpload']['name'])) {
+        header('Location: createQuestion.php?createQuestion=noFileSelected');
+        exit();
+    }
+
+    $imageName = basename($_FILES["fileToUpload"]["name"]);
     // Create keyword array
     $keywords = array();
 
