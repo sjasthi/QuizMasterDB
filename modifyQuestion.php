@@ -52,6 +52,22 @@ if ($result->num_rows > 0) {
         }
       }
 
+      $questionID = $row['id']; 
+      // Fetch keywords linked to the question 
+      $keywordQuery = "SELECT k.keyword 
+                        FROM keywords k 
+                        JOIN question_keywords qk ON k.id = qk.keyword_id 
+                        WHERE qk.question_id = '$questionID'"; 
+
+      $keywordResult = mysqli_query($db, $keywordQuery); 
+      $keywords = ''; 
+      
+      while ($keywordRow = mysqli_fetch_assoc($keywordResult)) { 
+        $keywords .= $keywordRow['keyword'] . ', '; 
+      } 
+      
+      $keywords = rtrim($keywords, ', ');
+
       echo '<h2 id="title">Modify Question</h2><br>';
       echo '<form action="modifyTheQuestion.php" method="POST" enctype="multipart/form-data">
       <br>
@@ -95,6 +111,11 @@ if ($result->num_rows > 0) {
       <div>
         <label for="optional">Answer</label>
         <input type="text" class="form-control" name="answer" value="'.$row["answer"].'"  maxlength="255" style=width:400px required><br>
+      </div>
+
+      <div>
+        <label for="keywords">Keywords</label>
+        <input type="text" class="form-control" name="keywords" value="' .$keywords. '"  maxlength="255" style=width:400px><br>
       </div>
 
       <div class="form-group col-md-4">

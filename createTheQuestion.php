@@ -4,7 +4,6 @@ include_once 'db_configuration.php';
 
 if (isset($_POST['topic'])){
 
-    echo "HERE";
     $topic = mysqli_real_escape_string($db, $_POST['topic']);
     $question = mysqli_real_escape_string($db,$_POST['question']);
     $choice1 = mysqli_real_escape_string($db,$_POST['choice_1']);
@@ -93,9 +92,10 @@ if (isset($_POST['topic'])){
                     if (mysqli_num_rows($keywordExistsResult) > 0) { 
                         // Keyword exists, link it to the question in question_keywords table 
                         $keywordIdRow = mysqli_fetch_assoc($keywordExistsResult); 
-                        $id = $keywordIdRow['id']; 
+
+                        $keywordID = $keywordIdRow['id']; 
                         
-                        $linkKeywordQuery = "INSERT INTO question_keywords(question_id, keyword_id) VALUES ('$question_id', '$id')";
+                        $linkKeywordQuery = "INSERT INTO question_keywords(question_id, keyword_id) VALUES ('$questionID', '$keywordID')"; 
                         mysqli_query($db, $linkKeywordQuery); 
                     } else { 
                         // Keyword does not exist, create a new keyword and link it to question_keywords table 
@@ -103,7 +103,7 @@ if (isset($_POST['topic'])){
                         mysqli_query($db, $createKeywordQuery); 
 
                         $newKeywordID = mysqli_insert_id($db); 
-                        $linkKeywordQuery = "INSERT INTO question_keywords(question_id, keyword_id) VALUES ('$question_id', '$newKeywordID')";
+                        $linkKeywordQuery = "INSERT INTO question_keywords(question_id, keyword_id) VALUES ('$questionID', '$newKeywordID')"; 
                         mysqli_query($db, $linkKeywordQuery); 
                     } 
                 }
@@ -113,9 +113,9 @@ if (isset($_POST['topic'])){
             }
         }else{
             header('location: createQuestion.php?createQuestion=answerFailed'); 
-    }        
+        }        
 
-}//end if
+    }//end if
 
 function emailValidate($answer){
     global $choice1,$choice2,$choice3,$choice4;

@@ -68,6 +68,42 @@ if (isset($_POST['id'])){
                     WHERE id = '$id'";
 
                     mysqli_query($db, $sql);
+
+                    // Modify keywords
+                    $keywords = $_POST['keywords'];
+                    $keywordArray = explode(',', $keywords);
+                    $keywordArray = array_map('trim', $keywordArray);
+                    $keywordArray = array_filter($keywordArray);
+
+                    // Delete old keywords
+                    $deleteKeywordQuery = "DELETE FROM question_keywords
+                                            WHERE question_id = '$id'";
+                    mysqli_query($db, $deleteKeywordQuery);
+
+                    // Insert new keywords
+                    foreach($keywordArray as $keyword){
+                        $keyword = mysqli_real_escape_string($db, $keywords);
+
+                        // Check for existing keywords in database
+                        $checkKeywordQuery = "SELECT id
+                                            FROM keywords
+                                            WHERE keyword = '$keyword'";
+                        $keywordResult = mysqli_query($db, $checkKeywordQuery);
+
+                        if (mysqli_num_rows($keywordResult) > 0){
+                            $keywordRow = mysqli_fetch_assoc($keywordResult);
+                            $keywordID = $keywordRow['id'];
+                        } else{
+                            $insertKeywordQuery = "INSERT INTO keywords (keyword) 
+                                                VALUES ('$keyword')";
+                            mysqli_query($db, $insertKeywordQuery);
+                            $keywordID = mysqli_insert_id($db);
+                        }
+
+                        $insertQuestionKeywordQuery = "INSERT INTO question_keywords (question_id, keyword_id)
+                                                    VALUES ('$id', '$keywordID')";
+                    }
+
                     header('location: questions_list.php?questionUpdated=Success');
                     }
                 }

@@ -47,7 +47,9 @@
     }
   
     ?>
+    
     <form action="createTheQuestion.php" method="POST" enctype="multipart/form-data">
+
         <br>
         <h3 id="title">Create A Question</h3> <br>
         
