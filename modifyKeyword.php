@@ -37,7 +37,8 @@ if ($result->num_rows > 0) {
 
       <br>
       <div class="text-left">
-          <button type="submit" name="submit" class="btn btn-primary btn-md align-items-center">Modify Keyword</button>
+			<a href="keywords_list.php" class="btn btn-secondary btn-md align-items-center">Cancel</a>
+			<button type="submit" name="submit" class="btn btn-primary btn-md align-items-center">Modify Keyword</button>
       </div>
       <br> <br>
       
