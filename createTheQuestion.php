@@ -12,6 +12,13 @@ if (isset($_POST['topic'])){
     $choice4 = mysqli_real_escape_string($db,$_POST['choice_4']);
     $answer = mysqli_real_escape_string($db,$_POST['answer']);
     $imageName = basename($_FILES["fileToUpload"]["name"]);
+        // check for empty file
+    if(empty($_FILES['fileToUpload']['name'])) {
+        header('Location: createQuestion.php?createQuestion=noFileSelected');
+        exit();
+    }
+
+    $imageName = basename($_FILES["fileToUpload"]["name"]);
     // Create keyword array
     $keywords = array();
 
@@ -72,7 +79,7 @@ if (isset($_POST['topic'])){
 
                 mysqli_query($db, $sql);
 
-                $questionID = mysqli_insert_id($db);
+                $question_id = mysqli_insert_id($db);
 
                 // Insert keywords into the database (keywords and question_keywords)
                 foreach ($keywords as $keyword) { 
@@ -85,6 +92,7 @@ if (isset($_POST['topic'])){
                     if (mysqli_num_rows($keywordExistsResult) > 0) { 
                         // Keyword exists, link it to the question in question_keywords table 
                         $keywordIdRow = mysqli_fetch_assoc($keywordExistsResult); 
+
                         $keywordID = $keywordIdRow['id']; 
                         
                         $linkKeywordQuery = "INSERT INTO question_keywords(question_id, keyword_id) VALUES ('$questionID', '$keywordID')"; 

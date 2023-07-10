@@ -19,6 +19,12 @@
 <div class="container">
     <!--Check the CeremonyCreated and if Failed, display the error message-->
     <?php
+    //if no image is selected, display error message
+    if(isset($_GET['createQuestion'])) {
+        if($_GET["createQuestion"] == "noFileSelected"){
+            echo '<br><h3 align="center" class="bg-danger">ERROR - No image file selected!</h3>';
+        }
+    }
     if(isset($_GET['createQuestion'])){
         if($_GET["createQuestion"] == "fileRealFailed"){
             echo '<br><h3 align="center" class="bg-danger">FAILURE - Your image is not real, Please Try Again!</h3>';
