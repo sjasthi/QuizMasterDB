@@ -73,22 +73,22 @@ if (isset($_POST['topic'])){
 
                 mysqli_query($db, $sql);
 
-                $questionID = mysqli_insert_id($db);
+                $question_id = mysqli_insert_id($db);
 
                 // Insert keywords into the database (keywords and question_keywords)
                 foreach ($keywords as $keyword) { 
                     $keyword = mysqli_real_escape_string($db, $keyword); 
 
                     // Check if the keyword already exists in keywords table 
-                    $keywordExistsQuery = "SELECT keywordID FROM keywords WHERE keyword = '$keyword' LIMIT 1"; 
+                    $keywordExistsQuery = "SELECT id FROM keywords WHERE keyword = '$keyword' LIMIT 1"; 
                     $keywordExistsResult = mysqli_query($db, $keywordExistsQuery); 
                     
                     if (mysqli_num_rows($keywordExistsResult) > 0) { 
                         // Keyword exists, link it to the question in question_keywords table 
                         $keywordIdRow = mysqli_fetch_assoc($keywordExistsResult); 
-                        $keywordID = $keywordIdRow['keywordID']; 
+                        $id = $keywordIdRow['id']; 
                         
-                        $linkKeywordQuery = "INSERT INTO question_keywords(questionID, keywordID) VALUES ('$questionID', '$keywordID')"; 
+                        $linkKeywordQuery = "INSERT INTO question_keywords(question_id, keyword_id) VALUES ('$question_id', '$id')";
                         mysqli_query($db, $linkKeywordQuery); 
                     } else { 
                         // Keyword does not exist, create a new keyword and link it to question_keywords table 
@@ -96,7 +96,7 @@ if (isset($_POST['topic'])){
                         mysqli_query($db, $createKeywordQuery); 
 
                         $newKeywordID = mysqli_insert_id($db); 
-                        $linkKeywordQuery = "INSERT INTO question_keywords(questionID, keywordID) VALUES ('$questionID', '$newKeywordID')"; 
+                        $linkKeywordQuery = "INSERT INTO question_keywords(question_id, keyword_id) VALUES ('$question_id', '$newKeywordID')";
                         mysqli_query($db, $linkKeywordQuery); 
                     } 
                 }
