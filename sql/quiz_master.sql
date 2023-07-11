@@ -65,7 +65,7 @@ CREATE TABLE `questions` (
 -- Dumping data for table `questions`
 --
 
-INSERT INTO `questions` (`id`, `keyword`, `question`, `choice_1`, `choice_2`, `choice_3`, `choice_4`, `answer`, `image_name`) VALUES
+INSERT INTO `questions` (`id`, `topic`, `question`, `choice_1`, `choice_2`, `choice_3`, `choice_4`, `answer`, `image_name`) VALUES
 (1, 'Dances', 'Which of the following pairs are correctly matched', 'Kuchipudi ? Madhya Pradesh', 'Kathakali ? Kerala', 'Bharatnatyam ? Andhra Pradesh', 'Kathak ? Tamil Nadu', 'Kathakali ? Kerala', 'Images/Dances/kathakali.jpeg'),
 (2, 'Dances', 'Which among the following is not like others?', 'Kathakali', 'Odissi', 'Bhangra', 'Bharatanatyam', 'Bhangra', 'Images/dances/bhangra.jpeg'),
 (3, 'Dances', 'Which among the following is a folk dance of India', 'Manipuri', 'Bihu', 'Kathakali', 'Bharatanatyam', 'Bihu', 'Images/dances/bihu.jpeg'),
@@ -427,8 +427,7 @@ ALTER TABLE `users`
 ALTER TABLE `questions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
 
-ALTER TABLE `questions`
-RENAME COLUMN `topic` to `keyword`;
+--
 --
 -- AUTO_INCREMENT for table `topics`
 --
