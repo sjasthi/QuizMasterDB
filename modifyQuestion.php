@@ -1,4 +1,3 @@
-
 <?php $page_title = 'Modify Question'; ?>
 <?php $page_title = 'Quiz Master > Modify Questions'; ?>
 <?php 
@@ -125,7 +124,8 @@ if ($result->num_rows > 0) {
       <input type="hidden" class="form-control" name="oldimage" value="'.$row["image_name"].'" maxlength="255" required>
       <br>
       <div class="text-left">
-          <button type="submit" name="submit" class="btn btn-primary btn-md align-items-center">Modify Question</button>
+			<a href="questions_list.php" class="btn btn-secondary btn-md align-items-center">Cancel</a>
+			<button type="submit" name="submit" class="btn btn-primary btn-md align-items-center">Modify Question</button>
       </div>
       <br> <br>
       
@@ -140,5 +140,3 @@ else {
 ?>
 
 </div>
-
-
