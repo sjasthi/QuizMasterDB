@@ -35,7 +35,7 @@ if ($result->num_rows > 0) {
     
     <div class="form-group col-md-4">
       <label for="id">Id</label>
-      <input type="text" class="form-control" name="id" value="'.$row["keywordID"].'"  maxlength="5" readonly>
+      <input type="text" class="form-control" name="id" value="'.$row["id"].'"  maxlength="5" readonly>
     </div>
     
     <div class="form-group col-md-8">
