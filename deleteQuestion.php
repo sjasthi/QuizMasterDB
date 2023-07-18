@@ -80,6 +80,7 @@ if ($result->num_rows > 0) {
            
     <br>
     <div class="text-left">
+		<a href="questions_list.php" class="btn btn-secondary btn-md align-items-center">Cancel</a>
         <button type="submit" name="submit" class="btn btn-primary btn-md align-items-center">Confirm Delete Question</button>
     </div>
     <br> <br>

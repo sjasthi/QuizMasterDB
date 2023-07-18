@@ -4,7 +4,6 @@ include_once 'db_configuration.php';
 
 if (isset($_POST['topic'])){
 
-    echo "HERE";
     $topic = mysqli_real_escape_string($db, $_POST['topic']);
     $question = mysqli_real_escape_string($db,$_POST['question']);
     $choice1 = mysqli_real_escape_string($db,$_POST['choice_1']);
@@ -13,6 +12,23 @@ if (isset($_POST['topic'])){
     $choice4 = mysqli_real_escape_string($db,$_POST['choice_4']);
     $answer = mysqli_real_escape_string($db,$_POST['answer']);
     $imageName = basename($_FILES["fileToUpload"]["name"]);
+        // check for empty file
+    if(empty($_FILES['fileToUpload']['name'])) {
+        header('Location: createQuestion.php?createQuestion=noFileSelected');
+        exit();
+    }
+
+    $imageName = basename($_FILES["fileToUpload"]["name"]);
+    // Create keyword array
+    $keywords = array();
+
+    foreach($_POST as $key => $value){
+        if(strpos($key, 'keyword_') === 0){
+            $keyword = mysqli_real_escape_string($db, $value);
+            $keywords[] = $keyword;
+        }
+    }
+
     $validate = true;
     $validate = emailValidate($answer);
     
@@ -45,6 +61,11 @@ if (isset($_POST['topic'])){
             header('location: createQuestion.php?createQuestion=fileTypeFailed');
             $uploadOk = 0;
         }
+
+        if(!is_dir($target_dir)){
+            mkdir($target_dir, 0777, true);
+        }
+
         // Check if $uploadOk is set to 0 by an error
         if ($uploadOk == 0) {
             
@@ -55,16 +76,48 @@ if (isset($_POST['topic'])){
                 $sql = "INSERT INTO questions(topic,question,choice_1,choice_2,choice_3,choice_4,answer,image_name)
                 VALUES ('$topic','$question','$choice1','$choice2','$choice3','$choice4','$answer','$target_file')
                 ";
-
+                
                 mysqli_query($db, $sql);
+                
+                $question_id = mysqli_insert_id($db);
+                
+
+                // Insert keywords into the database (keywords and question_keywords)
+                foreach ($keywords as $keyword) { 
+                    $keyword = mysqli_real_escape_string($db, $keyword); 
+                
+                    // Check if the keyword already exists in keywords table 
+                    $keywordExistsQuery = "SELECT id FROM keywords WHERE keyword = '$keyword' LIMIT 1"; 
+                    $keywordExistsResult = mysqli_query($db, $keywordExistsQuery); 
+                    
+                    if (mysqli_num_rows($keywordExistsResult) > 0) { 
+                        // Keyword exists, link it to the question in question_keywords table 
+                        $keywordIdRow = mysqli_fetch_assoc($keywordExistsResult); 
+                
+                        $keywordID = $keywordIdRow['id']; 
+                        
+                        $linkKeywordQuery = "INSERT INTO question_keywords(question_id, keyword_id) VALUES ('$question_id', '$keywordID')"; 
+                        mysqli_query($db, $linkKeywordQuery); 
+                    } else { 
+                        // Keyword does not exist, create a new keyword and link it to question_keywords table 
+                        $createKeywordQuery = "INSERT INTO keywords(keyword) VALUES ('$keyword')"; 
+                        mysqli_query($db, $createKeywordQuery); 
+                        
+                        $newKeywordID = mysqli_insert_id($db); 
+                        $linkKeywordQuery = "INSERT INTO question_keywords(question_id, keyword_id) VALUES ('$question_id', '$newKeywordID')"; 
+                        mysqli_query($db, $linkKeywordQuery); 
+                    } 
+                }
+                
+
                 header('location: questions_list.php?createQuestion=Success');
                 }
             }
         }else{
             header('location: createQuestion.php?createQuestion=answerFailed'); 
-    }        
+        }        
 
-}//end if
+    }//end if
 
 function emailValidate($answer){
     global $choice1,$choice2,$choice3,$choice4;

@@ -87,6 +87,7 @@ $GLOBALS['data'] = mysqli_query($db, $query);
                     <th>Choice 4</th>
                     <th>Answer</th>
                     <th>Image Name</th>
+                    <th>Display</th>
                     <th>Modify</th>
                     <th>Delete</th>
                 </tr>
@@ -98,7 +99,7 @@ $GLOBALS['data'] = mysqli_query($db, $query);
                     // output data of each row
                     while($row = $data->fetch_assoc()) {
                         echo '<tr>
-                                <td>'.$row["id"].'</td>
+                                <td><a href="question_display.php?id='.$row["id"].'"> '.$row["id"].'  </a></td>
                                 <td>'.$row["topic"].' </span> </td>
                                 <td>'.$row["question"].'</td>
                                 <td>'.$row["choice_1"].'</td>
@@ -107,6 +108,7 @@ $GLOBALS['data'] = mysqli_query($db, $query);
                                 <td>'.$row["choice_4"].'</td>
                                 <td>'.$row["answer"].' </span> </td>
                                 <td><img class="thumbnailSize" src="' .$row["image_name"]. '" alt="'.$row["image_name"].'"></td>
+                                <td><a class="btn btn-warning btn-sm" href="question_display.php?id='.$row["id"].'">Display</a></td>
                                 <td><a class="btn btn-warning btn-sm" href="modifyQuestion.php?id='.$row["id"].'">Modify</a></td>
                                 <td><a class="btn btn-danger btn-sm" href="deleteQuestion.php?id='.$row["id"].'">Delete</a></td>
                             </tr>';

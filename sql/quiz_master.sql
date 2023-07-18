@@ -352,6 +352,41 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `hash`, `active`,
 (3, 'SILC', 'Tester', 'test@silcmn.com', '$2y$10$zFAG5GBNtf.5BpowMqZSputSLeG8OzfKACpjAMsePjZhu.TnvU/Bu', 'yes', 'admin', '0000-00-00', '0000-00-00'),
 (4, 'SILC', 'CS320', 'cs320@silcmn.com', '$2y$10$zFAG5GBNtf.5BpowMqZSputSLeG8OzfKACpjAMsePjZhu.TnvU/Bu', 'yes', 'admin', '0000-00-00', '0000-00-00');
 -- --------------------------------------------------------
+--
+-- Table structure for table `keywords`
+--
+
+CREATE TABLE `keywords` (
+    `id` int(11) NOT NULL,
+    `keyword` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+insert into `keywords` values 
+(1, 'dances'),
+(2, 'dresses'),
+(3, 'Embroidery'),
+(4, 'Festivals'),
+(5, 'foods'),
+(6, 'instruments'),
+(7, 'leaders'),
+(8,'Monuments'),
+(9, 'movies'),
+(10, 'NRIs'),
+(11, 'Sports'),
+(12, 'Dances'),
+(13, 'PHP');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `question_keywords`
+--
+
+CREATE TABLE `question_keywords` (
+    `question_id` int(11) NOT NULL,
+    `keyword_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
 
 --
 -- Indexes for dumped tables
@@ -393,11 +428,16 @@ ALTER TABLE `questions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
 
 --
+--
 -- AUTO_INCREMENT for table `topics`
 --
 ALTER TABLE `topics`
   MODIFY `order` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
+
+ALTER TABLE keywords MODIFY id int NOT NULL AUTO_INCREMENT PRIMARY KEY;
+
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
