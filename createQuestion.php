@@ -94,9 +94,14 @@
         </table>
 
         <!-- Add keyword textboxes | No require to add keywords -->
+        
+<tr>
+    <td colspan="2">
         <div id="keywordContainer"></div>
         <button type="button" id="addKeyword">Add Keyword</button> 
         <button type="button" class="removeKeyword hidden">Remove Keyword</button>
+    </td>
+</tr>
 
         <br><br>
         <div align="center" class="text-left">
@@ -113,20 +118,66 @@
 <!-- .hidden {display: none;} -->
 <script> 
 $(document).ready(function() {
-  var i = 1;
+  var i = 1; //counter for adding keyword dropdowns
+  var selectedKeywords = []; // Array to store selected keywords to prevent duplicate selection of keywords
+
+  //New keyword added to the keyword container div
   $('#addKeyword').click(function() {
-    $('#keywordContainer').append('<div id="row' + i + '"><label" for="keyword_' + i + '">Keyword ' + i + '</label><input type="text" name="keyword_' + i + '" value=""></div>')
+    var keywordDropdown = '<div id="row' + i + '"><label for="keyword_' + i + '">Keyword ' + i + '</label>' +
+      '<select name="keyword[' + i + ']" required>' +
+      '<option value="">Select a keyword</option>';
+
+    <?php
+    //Keywords are stored in this variable to be later displayed on the dropdown box
+    $keywordResultSet = $mysqli->query("SELECT DISTINCT keyword FROM keywords ORDER BY keyword ASC");
+    while ($keywordRow = $keywordResultSet->fetch_assoc()) {
+      $keyword = $keywordRow['keyword'];
+      echo "if (!selectedKeywords.includes('$keyword')) {";
+      echo "keywordDropdown += '<option value=\'$keyword\'>$keyword</option>';";
+      echo "}";
+    }
+    ?>
+
+    keywordDropdown += '</select></div>';
+    $('#keywordContainer').append(keywordDropdown);
     i++;
-    $('.removeKeyword').removeClass('hidden');   
+    $('.removeKeyword').removeClass('hidden');
+    updateSelectedKeywords(); // Update the selectedKeywords array
   });
+
+  //Removes the keyword dropdown when clicking on this button
   $(document).on('click', '.removeKeyword', function() {
     var button_id = $(this).attr("id");
     i--;
     $('#row' + $('#keywordContainer div').length).remove();
-    if (i<=1) {
+    if (i <= 1) {
       $('.removeKeyword').addClass('hidden');
     }
+    updateSelectedKeywords(); // Update the selectedKeywords array
   });
+
+  //Updates the selectedKeywords array
+  function updateSelectedKeywords() {
+    selectedKeywords = []; // Reset the array
+    $('select[name^="keyword"]').each(function() {
+      var selectedKeyword = $(this).val();
+      if (selectedKeyword !== '') {
+        selectedKeywords.push(selectedKeyword);
+      }
+    });
+    disableSelectedKeywords();
+  }
+
+  //disables the already selected keywords
+  function disableSelectedKeywords() {
+    $('select[name^="keyword"]').each(function() {
+      var currentSelect = $(this);
+      currentSelect.find('option').prop('disabled', false);
+      selectedKeywords.forEach(function(keyword) {
+        currentSelect.find('option[value="' + keyword + '"]').prop('disabled', true);
+      });
+    });
+  }
 });
 </script>
 <!-- <div id="keywordContainer"></div>
