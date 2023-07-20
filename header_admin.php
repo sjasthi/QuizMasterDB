@@ -1,21 +1,25 @@
 <?php               
-  echo '<li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="topics_list.php" id="header" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    List
-  </a>
+echo '<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" href="topics_list.php" id="header" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+List
+</a>
 
-  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-    <a class="nav-link" id="header" href="topics_list.php">Topics<span class="sr-only">(current)</span></a>
-    <a class="nav-link" id="header" href="questions_list.php">Questions<span class="sr-only">(current)</span></a>
-  </div>
-  </li>';
-  
-  //echo '<li class="nav-item active"><a class="nav-link" id="header" href="topics_list.php">Topics<span class="sr-only">(current)</span></a></li>';
-  //echo '<li class="nav-item active"><a class="nav-link" id="header" href="questions_list.php">Questions<span class="sr-only">(current)</span></a></li>';
-  echo '<li class="nav-item active"><a class="nav-link" id="header" href="preferences.php">Preferences<span class="sr-only">(current)</span></a></li>';
-  echo '<li class="nav-item active"><a class="nav-link" id="header" href="about.php">About<span class="sr-only">(current)</span></a></li>';
-  echo '<li class="nav-item active"><a class="nav-link" id="header" href="help.php">Help<span class="sr-only">(current)</span></a></li>';
-  echo '<li class="nav-item active"><a class="nav-link" id="header" href="logout.php">Logout<span class="sr-only">(current)</span></a></li>';
+<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+<a class="nav-link" id="header" href="topics_list.php">Topics<span class="sr-only">(current)</span></a>
+<a class="nav-link" id="header" href="questions_list.php">Questions<span class="sr-only">(current)</span></a>
+<a class="nav-link" id="header" href="generate_quiz.php">Generate New Quiz<span class="sr-only">(current)</span></a>
+</div>
+</li>';
+
+
+
+//echo '<li class="nav-item active"><a class="nav-link" id="header" href="topics_list.php">Topics<span class="sr-only">(current)</span></a></li>';
+//echo '<li class="nav-item active"><a class="nav-link" id="header" href="questions_list.php">Questions<span class="sr-only">(current)</span></a></li>';
+echo '<li class="nav-item active"><a class="nav-link" id="header" href="generate_quiz.php">Generate New Quiz<span class="sr-only">(current)</span></a></li>'; 
+echo '<li class="nav-item active"><a class="nav-link" id="header" href="preferences.php">Preferences<span class="sr-only">(current)</span></a></li>';
+echo '<li class="nav-item active"><a class="nav-link" id="header" href="about.php">About<span class="sr-only">(current)</span></a></li>';
+echo '<li class="nav-item active"><a class="nav-link" id="header" href="help.php">Help<span class="sr-only">(current)</span></a></li>';
+echo '<li class="nav-item active"><a class="nav-link" id="header" href="logout.php">Logout<span class="sr-only">(current)</span></a></li>';
 ?>
 <!-- Bootstrap core JavaScript -->
 <script src="vendor/jquery/jquery.min.js"></script>
