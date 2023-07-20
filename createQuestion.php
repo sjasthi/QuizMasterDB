@@ -55,7 +55,7 @@
         
         <table>
             <tr>
-                <td style="width:100px">Question:</td>
+                <td style="width:100px">Topic:</td>
                 <td><select name="topic">
                     <?php 
                     while($rows = $resultset->fetch_assoc()){
