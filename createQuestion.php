@@ -91,6 +91,9 @@
                 <td style="width:100px">Image:</td>
                 <td><input type="file" name="fileToUpload" id="fileToUpload" maxlength="50" size="50" title="Please enter the Image Name."></td>
             </tr>
+            <tr>
+                <input type="hidden" name="keyword_count" id="keyword_count" value = 0>
+            </tr>
         </table>
 
         <!-- Add keyword textboxes | No require to add keywords -->
@@ -124,7 +127,7 @@ $(document).ready(function() {
   //New keyword added to the keyword container div
   $('#addKeyword').click(function() {
     var keywordDropdown = '<div id="row' + i + '"><label for="keyword_' + i + '">Keyword ' + i + '</label>' +
-      '<select name="keyword[' + i + ']" required>' +
+      '<select name="keyword[]" required>' +
       '<option value="">Select a keyword</option>';
 
     <?php
@@ -159,12 +162,15 @@ $(document).ready(function() {
   //Updates the selectedKeywords array
   function updateSelectedKeywords() {
     selectedKeywords = []; // Reset the array
+    var keywordCount  = 0;
     $('select[name^="keyword"]').each(function() {
       var selectedKeyword = $(this).val();
       if (selectedKeyword !== '') {
         selectedKeywords.push(selectedKeyword);
+        keywordCount++;
       }
     });
+    $('#keyword_count').val(keywordCount);
     disableSelectedKeywords();
   }
 
