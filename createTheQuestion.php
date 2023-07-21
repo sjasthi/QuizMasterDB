@@ -30,13 +30,6 @@ if (isset($_POST['topic'])){
         }
     }
 
-    // foreach($_POST as $key => $value){
-    //     if(strpos($key, 'keyword_') === 0){
-    //         $keyword = mysqli_real_escape_string($db, $value);
-    //         $keywords[] = $keyword;
-    //     }
-    // }
-
     $validate = true;
     $validate = emailValidate($answer);
     
