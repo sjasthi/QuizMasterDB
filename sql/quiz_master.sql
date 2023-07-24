@@ -292,7 +292,17 @@ INSERT INTO `questions` (`id`, `keyword`, `question`, `choice_1`, `choice_2`, `c
 (225, 'PHP', 'What is correct way to open file \"data.ext\" as readable?', 'open(\"time.txt\");', 'open(\"time.txt\",\"read\");', 'fopen(\"time.txt\",\"r\");', 'fopen(\"time.txt\",\"r+\");', 'fopen(\"time.txt\",\"r+\");', 'Images/PHP/phparray1.png'),
 (226, 'PHP', 'What is the superglobal variable holds information about headers, paths, and script locations?', '$_SESSION', '$_GLOBALS', '$_SERVER', '$_GET', '$_SERVER', 'Images/PHP/phparray1.png'),
 (227, 'PHP', 'when you want to check if two values are equal and of same data type. Which operator to use?', '!=', '=', '===', '==', '===', 'Images/PHP/phparray1.png'),
-(228, 'PHP', 'what method you use to print variables on php?', 'dump_var', 'dump', 'print', 'var_dump', 'var_dump', 'Images/PHP/download.png');
+(228, 'PHP', 'what method you use to print variables on php?', 'dump_var', 'dump', 'print', 'var_dump', 'var_dump', 'Images/PHP/download.png'),
+(229, 'Python','which of the varibales have the value equal to 50?','x','y','z','x and z','x and z', 'Images/Python/wwpp1.png'),
+(230, 'Python','what would python print?','true false','false true','true true','false false','true true', 'Images/Python/wwpp2.png'),
+(231, 'Python','what would python print?','1','2','3','4','3', 'Images/Python/wwpp3.png'),
+(232, 'Python','what would python print?','10','20','30','200','10', 'Images/Python/wwpp4.png'),
+(233, 'Python','what would python print?','11','10','200','13','10', 'Images/Python/wwpp5.png'),
+(234, 'Python','what would python print?','\','\\\','\\\n','n','\', 'Images/Python/wwpp6.png'),
+(235, 'Python','what would python print?','4','1 2 3 4','1234','12345','1234', 'Images/Python/wwpp7.png'),
+(236, 'Python','what would python print?','4','1 2 3 4','1234','12345','1234', 'Images/Python/wwpp7.png'),
+
+;
 
 -- --------------------------------------------------------
 
