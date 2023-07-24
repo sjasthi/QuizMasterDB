@@ -119,22 +119,27 @@
 <!-- Source used: https://stackoverflow.com/questions/60008639/add-input-fields-on-button-click-with-data-from-php -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 <!-- .hidden {display: none;} -->
+<!--Source used to avoid duplication of keywords: https://stackoverflow.com/questions/34388638/how-to-avoid-duplicate-options-from-dropdown-array-in-jquery -->
 <script> 
+//document.ready function loads up the structure of the web site before proceeding with the javascript
 $(document).ready(function() {
-  var i = 1; //counter for adding keyword dropdowns
+  var i = 1;
   var selectedKeywords = []; // Array to store selected keywords to prevent duplicate selection of keywords
 
-  //New keyword added to the keyword container div
+  //New keyword added to the keyword container div, i variable will start at 1
   $('#addKeyword').click(function() {
     var keywordDropdown = '<div id="row' + i + '"><label for="keyword_' + i + '">Keyword ' + i + '</label>' +
       '<select name="keyword[]" required>' +
       '<option value="">Select a keyword</option>';
 
     <?php
+
     //Keywords are stored in this variable to be later displayed on the dropdown box
     $keywordResultSet = $mysqli->query("SELECT DISTINCT keyword FROM keywords ORDER BY keyword ASC");
+
+    //loop thru every single keyword row and displaying it 
     while ($keywordRow = $keywordResultSet->fetch_assoc()) {
-      $keyword = $keywordRow['keyword'];
+      $keyword = $keywordRow['keyword']; //Hashmap or dictionary
       echo "if (!selectedKeywords.includes('$keyword')) {";
       echo "keywordDropdown += '<option value=\'$keyword\'>$keyword</option>';";
       echo "}";
@@ -144,6 +149,7 @@ $(document).ready(function() {
     keywordDropdown += '</select></div>';
     $('#keywordContainer').append(keywordDropdown);
     i++;
+    //Reveals the remove keyword button when add a keyword
     $('.removeKeyword').removeClass('hidden');
     updateSelectedKeywords(); // Update the selectedKeywords array
   });
@@ -156,10 +162,10 @@ $(document).ready(function() {
     if (i <= 1) {
       $('.removeKeyword').addClass('hidden');
     }
-    updateSelectedKeywords(); // Update the selectedKeywords array
+    updateSelectedKeywords();
   });
 
-  //Updates the selectedKeywords array
+  //Updates the selectedKeywords array with the newly selected keywords
   function updateSelectedKeywords() {
     selectedKeywords = []; // Reset the array
     var keywordCount  = 0;
@@ -171,16 +177,16 @@ $(document).ready(function() {
       }
     });
     $('#keyword_count').val(keywordCount);
-    disableSelectedKeywords();
+    removeSelectedKeywords(); // Call the function to remove the selected keywords
   }
 
-  //disables the already selected keywords
-  function disableSelectedKeywords() {
+  //remove/hide selected keywords from drop down box
+  function removeSelectedKeywords() {
     $('select[name^="keyword"]').each(function() {
       var currentSelect = $(this);
-      currentSelect.find('option').prop('disabled', false);
+      currentSelect.find('option').show(); // Show all options before removing
       selectedKeywords.forEach(function(keyword) {
-        currentSelect.find('option[value="' + keyword + '"]').prop('disabled', true);
+        currentSelect.find('option[value="' + keyword + '"]').hide();
       });
     });
   }
