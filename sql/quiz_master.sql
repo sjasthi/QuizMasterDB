@@ -383,7 +383,9 @@ insert into `keywords` values
 
 CREATE TABLE `question_keywords` (
     `question_id` int(11) NOT NULL,
-    `keyword_id` int(11) NOT NULL
+    `id` int(11) NOT NULL
+    foreign key (question_id) references questions(question_id),
+    foreign key (id) references keywords(keyword),
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -427,7 +429,6 @@ ALTER TABLE `users`
 ALTER TABLE `questions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
 
---
 --
 -- AUTO_INCREMENT for table `topics`
 --
