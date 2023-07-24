@@ -8,7 +8,7 @@ verifyLogin($page);
 
 // Query the database for keywords
 $query = "SELECT `keyword` FROM `keywords`";
-$keywords = mysqli_query($db, $query);
+$keywords_db = mysqli_query($db, $query);
 ?>
 
 <html>
@@ -32,7 +32,6 @@ $keywords = mysqli_query($db, $query);
 
     <br>
     <h3 id="title">Generate New Quiz</h3><br>
-    </body>
     <div class="container">
     <form action="display_custom_quiz.php" method="POST">
     <label>Number of questions to show:</label>
@@ -40,7 +39,7 @@ $keywords = mysqli_query($db, $query);
     <br>
     <label>Keywords:</label>
     <?php 
-    while($row = mysqli_fetch_assoc($keywords)) {
+    while($row = mysqli_fetch_assoc($keywords_db)) {
         echo "<div><input type='checkbox' name='keywords[]' value='" . $row['keyword'] . "'> " . $row['keyword'] . "</div>";
     }
     ?>
