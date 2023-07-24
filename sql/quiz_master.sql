@@ -65,7 +65,7 @@ CREATE TABLE `questions` (
 -- Dumping data for table `questions`
 --
 
-INSERT INTO `questions` (`id`, `keyword`, `question`, `choice_1`, `choice_2`, `choice_3`, `choice_4`, `answer`, `image_name`) VALUES
+INSERT INTO `questions` (`id`, `topic`, `question`, `choice_1`, `choice_2`, `choice_3`, `choice_4`, `answer`, `image_name`) VALUES
 (1, 'Dances', 'Which of the following pairs are correctly matched', 'Kuchipudi ? Madhya Pradesh', 'Kathakali ? Kerala', 'Bharatnatyam ? Andhra Pradesh', 'Kathak ? Tamil Nadu', 'Kathakali ? Kerala', 'Images/Dances/kathakali.jpeg'),
 (2, 'Dances', 'Which among the following is not like others?', 'Kathakali', 'Odissi', 'Bhangra', 'Bharatanatyam', 'Bhangra', 'Images/dances/bhangra.jpeg'),
 (3, 'Dances', 'Which among the following is a folk dance of India', 'Manipuri', 'Bihu', 'Kathakali', 'Bharatanatyam', 'Bihu', 'Images/dances/bihu.jpeg'),
@@ -361,19 +361,19 @@ CREATE TABLE `keywords` (
     `keyword` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 insert into `keywords` values 
-(1, `dances`),
-(2, `dresses`),
-(3, `Embroidery`),
-(4, `Festivals`),
-(5, `foods`),
-(6, `instruments`),
-(7, `leaders`),
-(8,`Monuments`),
-(9, `movies`),
-(10, `NRIs`),
-(11, `Sports`),
-(12, `Dances`),
-(13, `PHP`);
+(1, 'dances'),
+(2, 'dresses'),
+(3, 'Embroidery'),
+(4, 'Festivals'),
+(5, 'foods'),
+(6, 'instruments'),
+(7, 'leaders'),
+(8,'Monuments'),
+(9, 'movies'),
+(10, 'NRIs'),
+(11, 'Sports'),
+(12, 'Dances'),
+(13, 'PHP');
 
 -- --------------------------------------------------------
 
@@ -429,13 +429,16 @@ ALTER TABLE `users`
 ALTER TABLE `questions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
 
-
 --
 -- AUTO_INCREMENT for table `topics`
 --
 ALTER TABLE `topics`
   MODIFY `order` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
+
+ALTER TABLE keywords MODIFY id int NOT NULL AUTO_INCREMENT PRIMARY KEY;
+
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

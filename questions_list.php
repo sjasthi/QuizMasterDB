@@ -99,7 +99,7 @@ $GLOBALS['data'] = mysqli_query($db, $query);
                     // output data of each row
                     while($row = $data->fetch_assoc()) {
                         echo '<tr>
-                                <td>'.$row["id"].'</td>
+                                <td><a href="question_display.php?id='.$row["id"].'"> '.$row["id"].'  </a></td>
                                 <td>'.$row["topic"].' </span> </td>
                                 <td>'.$row["question"].'</td>
                                 <td>'.$row["choice_1"].'</td>
