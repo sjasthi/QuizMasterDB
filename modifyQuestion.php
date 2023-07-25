@@ -1,4 +1,3 @@
-
 <?php $page_title = 'Modify Question'; ?>
 <?php $page_title = 'Quiz Master > Modify Questions'; ?>
 <?php 
@@ -52,6 +51,22 @@ if ($result->num_rows > 0) {
         }
       }
 
+      $questionID = $row['id']; 
+      // Fetch keywords linked to the question 
+      $keywordQuery = "SELECT k.keyword 
+                        FROM keywords k 
+                        JOIN question_keywords qk ON k.id = qk.keyword_id 
+                        WHERE qk.question_id = '$questionID'"; 
+
+      $keywordResult = mysqli_query($db, $keywordQuery); 
+      $keywords = ''; 
+      
+      while ($keywordRow = mysqli_fetch_assoc($keywordResult)) { 
+        $keywords .= $keywordRow['keyword'] . ', '; 
+      } 
+      
+      $keywords = rtrim($keywords, ', ');
+
       echo '<h2 id="title">Modify Question</h2><br>';
       echo '<form action="modifyTheQuestion.php" method="POST" enctype="multipart/form-data">
       <br>
@@ -97,6 +112,11 @@ if ($result->num_rows > 0) {
         <input type="text" class="form-control" name="answer" value="'.$row["answer"].'"  maxlength="255" style=width:400px required><br>
       </div>
 
+      <div>
+        <label for="keywords">Keywords</label>
+        <input type="text" class="form-control" name="keywords" value="' .$keywords. '"  maxlength="255" style=width:400px><br>
+      </div>
+
       <div class="form-group col-md-4">
         <label for="cadence">New Image Path (Not Required)</label>
         <input type="file" name="fileToUpload" id="fileToUpload" maxlength="255">
@@ -104,7 +124,8 @@ if ($result->num_rows > 0) {
       <input type="hidden" class="form-control" name="oldimage" value="'.$row["image_name"].'" maxlength="255" required>
       <br>
       <div class="text-left">
-          <button type="submit" name="submit" class="btn btn-primary btn-md align-items-center">Modify Question</button>
+			<a href="questions_list.php" class="btn btn-secondary btn-md align-items-center">Cancel</a>
+			<button type="submit" name="submit" class="btn btn-primary btn-md align-items-center">Modify Question</button>
       </div>
       <br> <br>
       
@@ -119,5 +140,3 @@ else {
 ?>
 
 </div>
-
-

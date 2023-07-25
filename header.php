@@ -46,6 +46,7 @@ if(!isset($page_title)) { $page_title = 'Quiz Master'; }
         <li class="nav-item">
             <?php
             if (isset($_SESSION['role'])){
+                echo '<li class="nav-item active"><a class="nav-link" id="header" href="generate_quiz.php">Generate New Quiz<span class="sr-only">(current)</span></a>';
                 echo '<li class="nav-item active"><a class="nav-link" id="header" href="keywords_list.php">Keywords List<span class="sr-only">(current)</span></a>';
                 echo '<li class="nav-item active"><a class="nav-link" id="header" href="questions_list.php">Questions List<span class="sr-only">(current)</span></a>';
                 echo '<li class="nav-item active"><a class="nav-link" id="header" href="topics_list.php">Topics List<span class="sr-only">(current)</span></a>';

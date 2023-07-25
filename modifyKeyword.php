@@ -27,7 +27,7 @@ if ($result->num_rows > 0) {
       
       <div>
         <label for="id">ID</label>
-        <input type="text" class="form-control" name="id" value="'.$row["keywordID"].'"  maxlength="5" style=width:400px readonly><br>
+        <input type="text" class="form-control" name="id" value="'.$row["id"].'"  maxlength="5" style=width:400px readonly><br>
       </div>
       
       <div>
@@ -37,7 +37,8 @@ if ($result->num_rows > 0) {
 
       <br>
       <div class="text-left">
-          <button type="submit" name="submit" class="btn btn-primary btn-md align-items-center">Modify Keyword</button>
+			<a href="keywords_list.php" class="btn btn-secondary btn-md align-items-center">Cancel</a>
+			<button type="submit" name="submit" class="btn btn-primary btn-md align-items-center">Modify Keyword</button>
       </div>
       <br> <br>
       

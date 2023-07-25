@@ -13,14 +13,7 @@ if (isset($_POST['id'])){
             WHERE id = '$id'";
 
     mysqli_query($db, $sql);
-	
-	$sql2 = "DELETE FROM question_keywords
-			WHERE question_id = '$id'";
-			
-	mysqli_query($db, $sql2);
-	
     header('location: questions_list.php?questionDeleted=Success');
 }//end if
 ?>
-
 

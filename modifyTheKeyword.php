@@ -2,18 +2,19 @@
 
 include_once 'db_configuration.php';
 
-if (isset($_POST['keyword'])){
+if (isset($_POST['keyword']) && isset($_POST['id'])){
 
     $keyword = mysqli_real_escape_string($db, $_POST['keyword']);
-    $keywordID = mysqli_real_escape_string($db, $_POST['id']);
+    $id = mysqli_real_escape_string($db, $_POST['id']);
 
     $sql = "UPDATE keywords
             SET
                 keyword = '$keyword'
             WHERE
-                keywordID = '$keywordID'";
+                id = '$id'";
                 
     mysqli_query($db, $sql);
     header('location: keywords_list.php?keywordUpdated=Success');
 }
 ?>
+
