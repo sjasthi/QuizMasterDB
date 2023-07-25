@@ -394,8 +394,7 @@ insert into `keywords` values
 CREATE TABLE `question_keywords` (
     `question_id` int(11) NOT NULL,
     `id` int(11) NOT NULL
-    foreign key (question_id) references questions(question_id),
-    foreign key (id) references keywords(keyword),
+
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
