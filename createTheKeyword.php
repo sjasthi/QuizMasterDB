@@ -36,6 +36,8 @@ if (isset($_POST['keyword'])) {
     if ($keyword_exists == true) {
         exit(header('location: keywords_list.php?createKeyword=KEYWORD_EXISTS'));
     } else {
+        // Make the first character of keyword capitalized
+        $keyword = ucfirst($keyword);
         $sql = "INSERT INTO keywords (keyword) VALUES ('$keyword')";
         mysqli_query($db, $sql);
 
