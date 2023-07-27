@@ -31,11 +31,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Calculate the score as a percentage
     $total_questions = count($_POST) / 2;
-    $score = ($correct_answers / $total_questions) * 100;
+    if ($total_questions > 0) {
+        $score = ($correct_answers / $total_questions) * 100;
+        // Round up number
+        $score = number_format($score, 2);
+    }
 }
 ?>
 
- <!-- Display to the screen  -->
+<!-- Display to the screen  -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,14 +48,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <div class='fs-3 text-center'>
-    <h2>Quiz Score:</h2>
     <?php
+    if ($total_questions == 0) {
+        echo "<h2>Quiz had zero questions. Please try again.</h2>";
+        echo "<a href='generate_quiz.php' class='btn btn-primary'>Generate New Quiz</a>";
+    } else {
+        echo "<h2>Quiz Score:</h2>";
         echo "<p>You answered $correct_answers out of $total_questions questions correctly.</p>";
-        // Round up number
-        $score = number_format($score, 2);
         echo "<p>Your score:<strong> $score% </strong></p>";
+    }
     ?>
     </div>
-    
 </body>
 </html>
