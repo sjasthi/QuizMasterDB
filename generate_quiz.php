@@ -38,7 +38,7 @@ $keywords_db = mysqli_query($db, $query);
     <div class="container text-left float-right">
     <form action="display_custom_quiz.php" method="POST">
     <label>Number of questions to show:</label>
-    <input required type="int" name="num_questions" maxlength="2" size="10" title="Enter a number">
+    <input required type="number" name="num_questions" maxlength="2" size="10" title="Enter a number">
     <br>
     <label>Keywords:</label>
     <?php 
