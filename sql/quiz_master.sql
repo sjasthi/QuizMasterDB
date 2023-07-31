@@ -276,23 +276,22 @@ INSERT INTO `questions` (`id`, `topic`, `question`, `choice_1`, `choice_2`, `cho
 (208, 'Sports', 'How many gold medals did India win at the 2010 com', '23', '45', '24', '38', '38', 'images/sports/Question18_sports.png'),
 (209, 'Sports', 'When was the first time India competed in the comm', '1934', '1946', '1988', '1892', '1934', 'images/sports/Question19_sports.jpg'),
 (210, 'Sports', 'What is Kho Kho?', 'It is a type of ice cream that includes chocolate ', 'It is a game similar to tag and a traditional game', 'It is a version of laser tag but better.', 'It is twister with an Indian twist involving 12 pl', 'It is a game similar to tag and a traditional game', 'images/sports/Question20_sports.jpg'),
-(212, 'Dances', 'does this work?', 'Yes', 'No', 'Maybe ', 'All of the about', 'Yes', 'Images/Dances/assam.JPG'),
-(213, 'PHP', 'How would display an entire array ($a) in a human readable form?', 'echo \"$a\";', 'print_r ($a);', 'echo $a;', 'None of the above', 'print_r ($a);', 'Images/PHP/phparray4.png'),
-(214, 'PHP', 'Which of the following will add an element to an array?', 'array_push();', 'array_shift();', 'array_reverse();', 'array_pop();', 'array_push();', 'Images/PHP/phparray3.png'),
-(215, 'PHP', 'Which of the following is a type of a PHP array?', 'Index Array', 'Associative Array', 'Multidimesional Arrays', 'All of the above', 'All of the above', 'Images/PHP/phparray2.png'),
-(216, 'PHP', 'PHP\'s numerically indexed array begins with position __.', '2', '0', '1', '-1', '0', 'Images/PHP/phparray6.png'),
-(217, 'PHP', 'Which function will return true if a variable is an array or false if it is not?', 'this_array();', 'do_array();', 'in_array();', 'is_array();', 'is_array();', 'Images/PHP/phparray5.png'),
-(218, 'PHP', 'When a developer wishes to fetch the a get parameter value, which call do they use?', 'GET(\'parameter\')', '$-GET[\'parameter\']', '$_GET[\'parameter\']', 'GET_PARAM[\'parameter\']', '$_GET[\'parameter\']', 'Images/PHP/phpsession1.png'),
-(219, 'PHP', 'What is an HTTP Cookie?', 'A database stored on the users computer', 'A small piece of user specific data stored on the server', 'A small piece user specific stored on the users computer', 'A tasty treat from grandmas oven!', 'A small piece user specific stored on the users computer', 'Images/PHP/phpsession2.png'),
-(220, 'PHP', 'Which of the following is true about cookies?', 'There is only one type of HTTP cookies', 'Cookies only last until the users browser is closed', 'Cookies are long term storage on the users computer', 'Cookies are temporary storage that eventually expire', 'Cookies are temporary storage that eventually expire', 'Images/PHP/phpsession3.png'),
-(221, 'PHP', 'Which of the following is true about Sessions?', 'Sessions are stored on the server', 'Session ids are stored with cookies', 'Sessions have no size or data limits', 'All of the above', 'All of the above', 'Images/PHP/phpsession4.png'),
-(222, 'PHP', 'What method is used to test whether a session value is set for a user?', 'is_set($_SESSION(\'parameter\'))', 'test(SESSION[\'parameter\'])', 'isset($_SESSION[\'parameter\'])', '$_SESSION[\'parameter\']', 'isset($_SESSION[\'parameter\'])', 'Images/PHP/phpsession5.png'),
-(223, 'PHP', 'Which one is open and close PHP server scripts?', '<&>...</&>', '<script>...</script>', '<?php>...</?>', '<?php…?>', '<?php…?>', 'Images/PHP/phparray1.png'),
-(224, 'PHP', 'PHP variable start with which symbol?', '$', '&', '!', '#', '$', 'Images/PHP/phparray1.png'),
-(225, 'PHP', 'What is correct way to open file \"data.ext\" as readable?', 'open(\"time.txt\");', 'open(\"time.txt\",\"read\");', 'fopen(\"time.txt\",\"r\");', 'fopen(\"time.txt\",\"r+\");', 'fopen(\"time.txt\",\"r+\");', 'Images/PHP/phparray1.png'),
-(226, 'PHP', 'What is the superglobal variable holds information about headers, paths, and script locations?', '$_SESSION', '$_GLOBALS', '$_SERVER', '$_GET', '$_SERVER', 'Images/PHP/phparray1.png'),
-(227, 'PHP', 'when you want to check if two values are equal and of same data type. Which operator to use?', '!=', '=', '===', '==', '===', 'Images/PHP/phparray1.png'),
-(228, 'PHP', 'what method you use to print variables on php?', 'dump_var', 'dump', 'print', 'var_dump', 'var_dump', 'Images/PHP/download.png');
+(211, 'PHP', 'How would display an entire array ($a) in a human readable form?', 'echo \"$a\";', 'print_r ($a);', 'echo $a;', 'None of the above', 'print_r ($a);', 'Images/PHP/phparray4.png'),
+(212, 'PHP', 'Which of the following will add an element to an array?', 'array_push();', 'array_shift();', 'array_reverse();', 'array_pop();', 'array_push();', 'Images/PHP/phparray3.png'),
+(213, 'PHP', 'Which of the following is a type of a PHP array?', 'Index Array', 'Associative Array', 'Multidimesional Arrays', 'All of the above', 'All of the above', 'Images/PHP/phparray2.png'),
+(214, 'PHP', 'PHP\'s numerically indexed array begins with position __.', '2', '0', '1', '-1', '0', 'Images/PHP/phparray6.png'),
+(215, 'PHP', 'Which function will return true if a variable is an array or false if it is not?', 'this_array();', 'do_array();', 'in_array();', 'is_array();', 'is_array();', 'Images/PHP/phparray5.png'),
+(216, 'PHP', 'When a developer wishes to fetch the a get parameter value, which call do they use?', 'GET(\'parameter\')', '$-GET[\'parameter\']', '$_GET[\'parameter\']', 'GET_PARAM[\'parameter\']', '$_GET[\'parameter\']', 'Images/PHP/phpsession1.png'),
+(217, 'PHP', 'What is an HTTP Cookie?', 'A database stored on the users computer', 'A small piece of user specific data stored on the server', 'A small piece user specific stored on the users computer', 'A tasty treat from grandmas oven!', 'A small piece user specific stored on the users computer', 'Images/PHP/phpsession2.png'),
+(218, 'PHP', 'Which of the following is true about cookies?', 'There is only one type of HTTP cookies', 'Cookies only last until the users browser is closed', 'Cookies are long term storage on the users computer', 'Cookies are temporary storage that eventually expire', 'Cookies are temporary storage that eventually expire', 'Images/PHP/phpsession3.png'),
+(219, 'PHP', 'Which of the following is true about Sessions?', 'Sessions are stored on the server', 'Session ids are stored with cookies', 'Sessions have no size or data limits', 'All of the above', 'All of the above', 'Images/PHP/phpsession4.png'),
+(220, 'PHP', 'What method is used to test whether a session value is set for a user?', 'is_set($_SESSION(\'parameter\'))', 'test(SESSION[\'parameter\'])', 'isset($_SESSION[\'parameter\'])', '$_SESSION[\'parameter\']', 'isset($_SESSION[\'parameter\'])', 'Images/PHP/phpsession5.png'),
+(221, 'PHP', 'Which one is open and close PHP server scripts?', '<&>...</&>', '<script>...</script>', '<?php>...</?>', '<?php…?>', '<?php…?>', 'Images/PHP/phparray1.png'),
+(222, 'PHP', 'PHP variable start with which symbol?', '$', '&', '!', '#', '$', 'Images/PHP/phparray1.png'),
+(223, 'PHP', 'What is correct way to open file \"data.ext\" as readable?', 'open(\"time.txt\");', 'open(\"time.txt\",\"read\");', 'fopen(\"time.txt\",\"r\");', 'fopen(\"time.txt\",\"r+\");', 'fopen(\"time.txt\",\"r+\");', 'Images/PHP/phparray1.png'),
+(224, 'PHP', 'What is the superglobal variable holds information about headers, paths, and script locations?', '$_SESSION', '$_GLOBALS', '$_SERVER', '$_GET', '$_SERVER', 'Images/PHP/phparray1.png'),
+(225, 'PHP', 'when you want to check if two values are equal and of same data type. Which operator to use?', '!=', '=', '===', '==', '===', 'Images/PHP/phparray1.png'),
+(226, 'PHP', 'what method you use to print variables on php?', 'dump_var', 'dump', 'print', 'var_dump', 'var_dump', 'Images/PHP/download.png');
 
 -- --------------------------------------------------------
 
@@ -372,8 +371,7 @@ insert into `keywords` values
 (9, 'movies'),
 (10, 'NRIs'),
 (11, 'Sports'),
-(12, 'Dances'),
-(13, 'PHP');
+(12, 'PHP');
 
 -- --------------------------------------------------------
 
@@ -386,7 +384,30 @@ CREATE TABLE `question_keywords` (
     `keyword_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-
+INSERT INTO `question_keywords` (`question_id`, `keyword_id`) VALUES
+(1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1), (8, 1), (9, 1), (10, 1),
+(11, 1), (12, 1), (13, 1), (14, 1), (15, 1), (16, 1), (17, 1), (18, 1), (19, 1), (20, 1),
+(21, 2), (22, 2), (23, 2), (24, 2), (25, 2), (26, 2), (27, 2), (28, 2), (29, 2), (30, 2),
+(31, 2), (32, 2), (33, 2), (34, 2), (35, 2), (36, 2), (37, 2), (38, 2), (39, 2), (40, 2),
+(41, 3), (42, 3), (43, 3), (44, 3), (45, 3), (46, 3), (47, 3), (48, 3), (49, 3), (50, 3),
+(51, 4), (52, 4), (53, 4), (54, 4), (55, 4), (56, 4), (57, 4), (58, 4), (59, 4), (60, 4),
+(61, 4), (62, 4), (63, 4), (64, 4), (65, 4), (66, 4), (67, 4), (68, 4), (69, 4), (70, 4),
+(71, 5), (72, 5), (73, 5), (74, 5), (75, 5), (76, 5), (77, 5), (78, 5), (79, 5), (80, 5),
+(81, 5), (82, 5), (83, 5), (84, 5), (85, 5), (86, 5), (87, 5), (88, 5), (89, 5), (90, 5),
+(91, 6), (92, 6), (93, 6), (94, 6), (95, 6), (96, 6), (97, 6), (98, 6), (99, 6), (100, 6),
+(101, 6), (102, 6), (103, 6), (104, 6), (105, 6), (106, 6), (107, 6), (108, 6), (109, 6), (110, 6),
+(111, 7), (112, 7), (113, 7), (114, 7), (115, 7), (116, 7), (117, 7), (118, 7), (119, 7), (120, 7),
+(121, 7), (122, 7), (123, 7), (124, 7), (125, 7), (126, 7), (127, 7), (128, 7), (129, 7), (130, 7),
+(131, 8), (132, 8), (133, 8), (134, 8), (135, 8), (136, 8), (137, 8), (138, 8), (139, 8), (140, 8),
+(141, 8), (142, 8), (143, 8), (144, 8), (145, 8), (146, 8), (147, 8), (148, 8), (149, 8), (150, 8),
+(151, 9), (152, 9), (153, 9), (154, 9), (155, 9), (156, 9), (157, 9), (158, 9), (159, 9), (160, 9),
+(161, 9), (126, 9), (163, 9), (164, 9), (165, 9), (166, 9), (167, 9), (168, 9), (169, 9), (170, 10),
+(171, 10), (172, 10), (173, 10), (174, 10), (175, 10), (176, 10), (177, 10), (178, 10), (179, 10), (180, 10),
+(181, 10), (182, 10), (183, 10), (184, 10), (185, 10), (186, 10), (187, 10), (188, 10), (189, 10), (190, 10),
+(191, 11), (192, 11), (193, 11), (194, 11), (195, 11), (196, 11), (197, 11), (198, 11), (199, 11), (200, 11),
+(201, 11), (202, 11), (203, 11), (204, 11), (205, 11), (206, 11), (207, 11), (208, 11), (209, 11), (210, 11),
+(211, 12), (212, 12), (213, 12), (214, 12), (215, 12), (216, 12), (217, 12), (218, 12), (219, 12), (220, 12),
+(221, 12), (222, 12), (223, 12), (224, 12), (225, 12), (226, 12);
 
 --
 -- Indexes for dumped tables
