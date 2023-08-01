@@ -12,6 +12,7 @@ if (isset($_POST['topic'])){
     $choice4 = mysqli_real_escape_string($db,$_POST['choice_4']);
     $answer = mysqli_real_escape_string($db,$_POST['answer']);
     $imageName = basename($_FILES["fileToUpload"]["name"]);
+
         // check for empty file
     if(empty($_FILES['fileToUpload']['name'])) {
         header('Location: createQuestion.php?createQuestion=noFileSelected');
@@ -22,10 +23,10 @@ if (isset($_POST['topic'])){
     // Create keyword array
     $keywords = array();
 
-    foreach($_POST as $key => $value){
-        if(strpos($key, 'keyword_') === 0){
-            $keyword = mysqli_real_escape_string($db, $value);
-            $keywords[] = $keyword;
+    if(isset($_POST['keyword']) && is_array($_POST['keyword'])){
+        foreach($_POST['keyword'] as $selectedKeyword){
+            $keyword = mysqli_real_escape_string($db, $selectedKeyword);
+            $keywords[]  = $keyword;
         }
     }
 
@@ -80,35 +81,22 @@ if (isset($_POST['topic'])){
                 mysqli_query($db, $sql);
                 
                 $question_id = mysqli_insert_id($db);
-                
 
-                // Insert keywords into the database (keywords and question_keywords)
-                foreach ($keywords as $keyword) { 
-                    $keyword = mysqli_real_escape_string($db, $keyword); 
-                
-                    // Check if the keyword already exists in keywords table 
-                    $keywordExistsQuery = "SELECT id FROM keywords WHERE keyword = '$keyword' LIMIT 1"; 
-                    $keywordExistsResult = mysqli_query($db, $keywordExistsQuery); 
-                    
-                    if (mysqli_num_rows($keywordExistsResult) > 0) { 
-                        // Keyword exists, link it to the question in question_keywords table 
-                        $keywordIdRow = mysqli_fetch_assoc($keywordExistsResult); 
-                
-                        $keywordID = $keywordIdRow['id']; 
-                        
-                        $linkKeywordQuery = "INSERT INTO question_keywords(question_id, keyword_id) VALUES ('$question_id', '$keywordID')"; 
-                        mysqli_query($db, $linkKeywordQuery); 
-                    } else { 
-                        // Keyword does not exist, create a new keyword and link it to question_keywords table 
-                        $createKeywordQuery = "INSERT INTO keywords(keyword) VALUES ('$keyword')"; 
-                        mysqli_query($db, $createKeywordQuery); 
-                        
-                        $newKeywordID = mysqli_insert_id($db); 
-                        $linkKeywordQuery = "INSERT INTO question_keywords(question_id, keyword_id) VALUES ('$question_id', '$newKeywordID')"; 
-                        mysqli_query($db, $linkKeywordQuery); 
-                    } 
-                }
-                
+                foreach($keywords as $keyword){
+                    $keyword = mysqli_real_escape_string($db, $keyword);
+                    $keywordID_Query = "SELECT id FROM keywords WHERE keyword = '$keyword'";
+                    $keywordID_Query_Result = mysqli_query($db, $keywordID_Query);
+
+                    if($keywordID_Query_Result && mysqli_num_rows($keywordID_Query_Result) > 0){
+                        $keywordIDRow = mysqli_fetch_assoc($keywordID_Query_Result);
+                        $keywordID = $keywordIDRow['id'];
+
+                        // Mapping question and keyword
+                        $mapKeywordQuery = "INSERT INTO question_keywords(question_id, keyword_id) VALUES ('$question_id', '$keywordID')";
+                        mysqli_query($db, $mapKeywordQuery);
+                    }
+
+                }           
 
                 header('location: questions_list.php?createQuestion=Success');
                 }

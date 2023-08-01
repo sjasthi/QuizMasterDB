@@ -17,7 +17,7 @@
         margin-left: auto;
         margin-right: auto;
         width: 400;
-        height: 400;
+        height: auto;
 }
 </style>
 <div class="container">
@@ -64,8 +64,8 @@ if ($result->num_rows > 0) {
       }
 
       //--------------My draft
-      echo '<img class="image-centered" src="' .$row["image_name"]. '" alt="'.$row["image_name"].'  ">';
       echo '<h2 id="title">Question Display</h2><br>';
+      echo '<img class="image-centered" src="' .$row["image_name"]. '" alt="'.$row["image_name"].'  ">';
       $sql_keywords = "SELECT k.keyword FROM keywords k
         INNER JOIN question_keywords qk ON k.id = qk.keyword_id
         WHERE qk.question_id = '".$id."'";

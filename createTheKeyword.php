@@ -25,7 +25,7 @@ function keyword_exists_in_db($keyword, $db)
 if (isset($_POST['keyword'])) {
 
     //escape any special characters in the input string
-    $keyword = mysqli_real_escape_string($db, $_POST['keyword']);
+    $keyword = strtolower(mysqli_real_escape_string($db, $_POST['keyword']));
 
     // check whether the keyword already exists in the DB
     $keyword_exists = keyword_exists_in_db($keyword, $db);
@@ -36,6 +36,8 @@ if (isset($_POST['keyword'])) {
     if ($keyword_exists == true) {
         exit(header('location: keywords_list.php?createKeyword=KEYWORD_EXISTS'));
     } else {
+        // Make the first character of keyword capitalized
+        $keyword = ucfirst($keyword);
         $sql = "INSERT INTO keywords (keyword) VALUES ('$keyword')";
         mysqli_query($db, $sql);
 

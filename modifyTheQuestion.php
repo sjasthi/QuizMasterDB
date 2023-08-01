@@ -2,7 +2,7 @@
 
 include_once 'db_configuration.php';
 
-if (isset($_POST['id'])){
+if (isset($_POST['id'])) {
 
     $id = mysqli_real_escape_string($db, $_POST['id']);
     $topic = mysqli_real_escape_string($db, $_POST['topic']);
@@ -107,37 +107,64 @@ if (isset($_POST['id'])){
                     header('location: questions_list.php?questionUpdated=Success');
                     }
                 }
-        }
-                else{
+        } else {
                     
-                $image = $_SESSION["image"];
-            
-                $sql = "UPDATE questions
-                SET topic = '$topic',
-                    question = '$question',
-                    choice_1 = '$choice1',
-                    choice_2 = '$choice2',
-                    choice_3 = '$choice3',
-                    choice_4 = '$choice4',
-                    answer = '$answer'
-                
-                WHERE id = '$id'";
+			$image = $_SESSION["image"];
+		
+			$sql = "UPDATE questions
+			SET topic = '$topic',
+				question = '$question',
+				choice_1 = '$choice1',
+				choice_2 = '$choice2',
+				choice_3 = '$choice3',
+				choice_4 = '$choice4',
+				answer = '$answer'
+			
+			WHERE id = '$id'";
 
-                mysqli_query($db, $sql);
-                
-                header('location: questions_list.php?questionUpdated=Success');
-                }
-    }else{
-        header('location: modifyQuestion.php?modifyQuestion=answerFailed&id='.$id);}
+			mysqli_query($db, $sql);
+			
+			header('location: questions_list.php?questionUpdated=Success');
+			}
+    } else {
+        header('location: modifyQuestion.php?modifyQuestion=answerFailed&id='.$id);
+	}
+		
+	$questionId = mysqli_real_escape_string($db, $_POST['id']);
+	
+	// delete old keywords
+	$deleteKeywordQuery = "DELETE FROM question_keywords
+                           WHERE question_id = '$questionId'";
+	mysqli_query($db, $deleteKeywordQuery);
+	
+	echo $questionId . "<br>";
+	
+	if(!empty($_POST['keywords'])) {
+		$keywords = $_POST['keywords'];
+		
+		// Display all the keywords
+		if(!empty($keywords)) {
+			foreach ($keywords as $keyword) {
+				echo $keyword . "<br>";
+			}
+		}
+		
+		foreach ($keywords as $keyword) {
+		$insertIntoQuestionKeywords = "INSERT INTO question_keywords (question_id, keyword_id)
+									   VALUES ('$questionId', '$keyword')";
+		mysqli_query($db, $insertIntoQuestionKeywords);
+		}
+	}
+	
 }//end if
 
-function emailValidate($answer){
-    global $choice1,$choice2,$choice3,$choice4;
-    if($answer == $choice1 or $answer == $choice2 or $answer == $choice3 or $answer == $choice4){
-        return true;
-    }else{
-        return false;
-    }      
+	function emailValidate($answer){
+		global $choice1,$choice2,$choice3,$choice4;
+		if($answer == $choice1 or $answer == $choice2 or $answer == $choice3 or $answer == $choice4){
+			return true;
+		} else{
+			return false;
+		}      
 }
 
 ?>

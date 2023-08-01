@@ -316,6 +316,11 @@ function resetUserQuizAnswers($quiz_topic, $num_questions){
         .answer{
             color: green;
             font-weight: bold;
+        .center{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         }
     </style>
     <body>
@@ -343,6 +348,7 @@ function resetUserQuizAnswers($quiz_topic, $num_questions){
         // this value is placed at the top ie (Page 1 of 20)
         $displayed_num_questions = $num_questions_to_show < $num_questions ? $num_questions_to_show : $num_questions;
 
+        echo "<center>";
         echo "<h2 style='display:inline;'>Quiz: $quiz_topic</h2>";
         // removed as per professor's request
         // if (isset($_GET['quiz_finished']) == false)
@@ -438,11 +444,15 @@ function resetUserQuizAnswers($quiz_topic, $num_questions){
         <label for='choice_4' id='choice_4_label'>$answers[3]</label>
         <br>
         </form>";
+
+        echo "</center>";
     ?>
 
+    <div style="text-align:center;">
     <button id='previousBtn' title='Navigate to the previous question'>Previous</button>
     <button id='submitBtn' title='This button is only enabled when all questions are answered'>Submit</button>
     <button id='nextBtn' title='Navigate to the next question'>Next</button>
+    </div>
 
     <script>
     // assign event listeners to the three buttons so our functions are triggered when they are clicked

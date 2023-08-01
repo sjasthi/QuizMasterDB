@@ -25,24 +25,28 @@
             echo '<br><h3 align="center" class="bg-danger">ERROR - No image file selected!</h3>';
         }
     }
+	
     if(isset($_GET['createQuestion'])){
         if($_GET["createQuestion"] == "fileRealFailed"){
             echo '<br><h3 align="center" class="bg-danger">FAILURE - Your image is not real, Please Try Again!</h3>';
         }
     }
+	
     if(isset($_GET['createQuestion'])){
         if($_GET["createQuestion"] == "answerFailed"){
             echo '<br><h3 align="center" class="bg-danger">FAILURE - Your answer was not one of the choices, Please Try Again!</h3>';
         }
     }
+	
     if(isset($_GET['createQuestion'])){
         if($_GET["createQuestion"] == "fileTypeFailed"){
             echo '<br><h3 align="center" class="bg-danger">FAILURE - Your image is not a valid image type (jpg,jpeg,png,gif), Please Try Again!</h3>';
         }
     }
+	
     if(isset($_GET['createQuestion'])){
-        if($_GET["createQuestion"] == "fileExistFailed"){
-            echo '<br><h3 align="center" class="bg-danger">FAILURE - Your image does not exist, Please Try Again!</h3>';
+        if($_GET["createQuestion"] == "fileExistFailed") {
+            echo '<br><h3 align="center" class="bg-danger">FAILURE - Your image already exist, Please Try Again!</h3>';
         }
     }
   
@@ -55,7 +59,7 @@
         
         <table>
             <tr>
-                <td style="width:100px">Question:</td>
+                <td style="width:100px">Topic:</td>
                 <td><select name="topic">
                     <?php 
                     while($rows = $resultset->fetch_assoc()){
@@ -91,12 +95,20 @@
                 <td style="width:100px">Image:</td>
                 <td><input type="file" name="fileToUpload" id="fileToUpload" maxlength="50" size="50" title="Please enter the Image Name."></td>
             </tr>
+            <tr>
+                <input type="hidden" name="keyword_count" id="keyword_count" value = 0>
+            </tr>
         </table>
 
         <!-- Add keyword textboxes | No require to add keywords -->
+        
+<tr>
+    <td colspan="2">
         <div id="keywordContainer"></div>
         <button type="button" id="addKeyword">Add Keyword</button> 
         <button type="button" class="removeKeyword hidden">Remove Keyword</button>
+    </td>
+</tr>
 
         <br><br>
         <div align="center" class="text-left">
@@ -111,22 +123,77 @@
 <!-- Source used: https://stackoverflow.com/questions/60008639/add-input-fields-on-button-click-with-data-from-php -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 <!-- .hidden {display: none;} -->
+<!--Source used to avoid duplication of keywords: https://stackoverflow.com/questions/34388638/how-to-avoid-duplicate-options-from-dropdown-array-in-jquery -->
 <script> 
+//document.ready function loads up the structure of the web site before proceeding with the javascript
 $(document).ready(function() {
   var i = 1;
+  var selectedKeywords = []; // Array to store selected keywords to prevent duplicate selection of keywords
+
+  //New keyword added to the keyword container div, i variable will start at 1
   $('#addKeyword').click(function() {
-    $('#keywordContainer').append('<div id="row' + i + '"><label" for="keyword_' + i + '">Keyword ' + i + '</label><input type="text" name="keyword_' + i + '" value=""></div>')
+    var keywordDropdown = '<div id="row' + i + '"><label for="keyword_' + i + '">Keyword ' + i + '</label>' +
+      '<select name="keyword[]" required>' +
+      '<option value="">Select a keyword</option>';
+
+    <?php
+
+    //Keywords are stored in this variable to be later displayed on the dropdown box
+    $keywordResultSet = $mysqli->query("SELECT DISTINCT keyword FROM keywords ORDER BY keyword ASC");
+
+    //loop thru every single keyword row and displaying it 
+    while ($keywordRow = $keywordResultSet->fetch_assoc()) {
+      $keyword = $keywordRow['keyword']; //Hashmap or dictionary
+      echo "if (!selectedKeywords.includes('$keyword')) {";
+      echo "keywordDropdown += '<option value=\'$keyword\'>$keyword</option>';";
+      echo "}";
+    }
+    ?>
+
+    keywordDropdown += '</select></div>';
+    $('#keywordContainer').append(keywordDropdown);
     i++;
-    $('.removeKeyword').removeClass('hidden');   
+    //Reveals the remove keyword button when add a keyword
+    $('.removeKeyword').removeClass('hidden');
+    updateSelectedKeywords(); // Update the selectedKeywords array
   });
+
+  //Removes the keyword dropdown when clicking on this button
   $(document).on('click', '.removeKeyword', function() {
     var button_id = $(this).attr("id");
     i--;
     $('#row' + $('#keywordContainer div').length).remove();
-    if (i<=1) {
+    if (i <= 1) {
       $('.removeKeyword').addClass('hidden');
     }
+    updateSelectedKeywords();
   });
+
+  //Updates the selectedKeywords array with the newly selected keywords
+  function updateSelectedKeywords() {
+    selectedKeywords = []; // Reset the array
+    var keywordCount  = 0;
+    $('select[name^="keyword"]').each(function() {
+      var selectedKeyword = $(this).val();
+      if (selectedKeyword !== '') {
+        selectedKeywords.push(selectedKeyword);
+        keywordCount++;
+      }
+    });
+    $('#keyword_count').val(keywordCount);
+    removeSelectedKeywords(); // Call the function to remove the selected keywords
+  }
+
+  //remove/hide selected keywords from drop down box
+  function removeSelectedKeywords() {
+    $('select[name^="keyword"]').each(function() {
+      var currentSelect = $(this);
+      currentSelect.find('option').show(); // Show all options before removing
+      selectedKeywords.forEach(function(keyword) {
+        currentSelect.find('option[value="' + keyword + '"]').hide();
+      });
+    });
+  }
 });
 </script>
 <!-- <div id="keywordContainer"></div>
